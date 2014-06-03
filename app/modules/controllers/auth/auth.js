@@ -30,32 +30,32 @@ private methods
 
 'use strict';
 
-var crypto =require('crypto');
+var crypto = require('crypto');
 var moment = require('moment');
 var Q = require('q');
 var lodash = require('lodash');
 var async = require('async');
 
-var dependency =require('../../../dependency.js');
-var pathParts =dependency.buildPaths(__dirname, {});
+var dependency = require('../../../dependency.js');
+var pathParts = dependency.buildPaths(__dirname, {});
 
-var Emailer =require(pathParts.services+'emailer/index.js');
-var StringMod =require(pathParts.services+'string/string.js');
-var MongoDBMod =require(pathParts.services+'mongodb/mongodb.js');
+var Emailer = require(pathParts.services + 'emailer/index.js');
+var StringMod = require(pathParts.services + 'string/string.js');
+var MongoDBMod = require(pathParts.services + 'mongodb/mongodb.js');
 
-var UserMod =require(pathParts.controllers+'user/user.js');
+var UserMod = require(pathParts.controllers + 'user/user.js');
 
 //global values that will be set by passed in objects (to avoid having to require in every file)
 // var db;
 var self;
 
 var defaults = {
-	userFields: ['_id'],
-	passwordEmail: {
-		// this should be overridden
-		subject: 'Password Reset Request',
-		template: 'passwordReset'
-	}
+    userFields: ['_id'],
+    passwordEmail: {
+        // this should be overridden
+        subject: 'Password Reset Request',
+        template: 'passwordReset'
+    }
 };
 
 /**
@@ -66,14 +66,14 @@ var defaults = {
 	// @param {Object} MongoDBMod
 */
 function Auth(options) {
-	this.opts = lodash.merge({}, defaults, options||{});
+    this.opts = lodash.merge({}, defaults, options || {});
 
-	self = this;
-	
-	// db =this.opts.db;
-	// Emailer = this.opts.Emailer;
-	// StringMod =this.opts.StringMod;
-	// MongoDBMod =this.opts.MongoDBMod;
+    self = this;
+
+    // db =this.opts.db;
+    // Emailer = this.opts.Emailer;
+    // StringMod =this.opts.StringMod;
+    MongoDBMod = this.opts.MongoDBMod;
 }
 
 /**
@@ -90,113 +90,96 @@ Creates a new user (user signup)
 @return {Promise}
 	@param {Object} user
 **/
-Auth.prototype.create = function(db, data, params)
-{
-	var deferred = Q.defer();
-	var ret ={code:0, msg:'Auth.create '};
-	
-	// if(data.password !=data.password_confirm) {		//if passwords don't match
-		// ret.msg ='Passwords must match';
-		// deferred.reject(ret);
-	// }
-	//check email to ensure valid (no duplicates, etc.)
-	
-	data =UserMod.fixPhoneFormat(db, data, params);
-	
-	if(data.status === undefined)
-	{
-		data.status = 'member';
-	}
-	if(data.social === undefined)
-	{
-		data.social = {};
-	}
-	delete data.super_admin;
-	
-	data = self.formatAlternateContact(data, {});
-	
-	if(data.email !== undefined)
-	{
-		data.email =data.email.toLowerCase();		//case insensitive
-		var promiseEmail =checkEmail(db, data.email, {});
-		promiseEmail.then(
-			function()
-			{
-				//if valid email, create the new user
-				var promiseCreate =createActual(db, data, {});
-				promiseCreate.then(
-					function(ret1)
-					{
-						//also login the user that was just created (i.e. give them an active session)
-						var promiseSession =updateSession(db, ret1.user, {});
-						promiseSession.then(
-							function(ret2)
-							{
-								ret1.user =ret2.user;
-								deferred.resolve(ret1);
-							},
-							function(err)
-							{
-								deferred.reject(err);
-							}
-						);
-					},
-					function(err)
-					{
-						deferred.reject(err);
-					}
-				);
-			},
-			function(err)
-			{
-				deferred.reject(err);
-			}
-		);
-	}
-	else if(data.phone !== undefined)
-	{
-		var promisePhone =checkPhone(db, data.phone, {});
-		promisePhone.then(
-			function()
-			{
-				//if valid phone, create the new user
-				var promiseCreate =createActual(db, data, {});
-				promiseCreate.then(
-					function(ret1)
-					{
-						//also login the user that was just created (i.e. give them an active session)
-						var promiseSession =updateSession(db, ret1.user, {});
-						promiseSession.then(
-							function(ret2)
-							{
-								ret1.user =ret2.user;
-								deferred.resolve(ret1);
-							},
-							function(err)
-							{
-								deferred.reject(err);
-							}
-						);
-					},
-					function(err)
-					{
-						deferred.reject(err);
-					}
-				);
-			},
-			function(err)
-			{
-				deferred.reject(err);
-			}
-		);
-	}
-	else
-	{
-		ret.code = 1;
-		ret.msg += 'Error: No Email or Phone information given ';
-		deferred.reject(ret);
-	}
-	return deferred.promise;
+Auth.prototype.create = function(db, data, params) {
+    var deferred = Q.defer();
+    var ret = {
+        code: 0,
+        msg: 'Auth.create '
+    };
+
+    // if(data.password !=data.password_confirm) {		//if passwords don't match
+    // ret.msg ='Passwords must match';
+    // deferred.reject(ret);
+    // }
+    //check email to ensure valid (no duplicates, etc.)
+
+    data = UserMod.fixPhoneFormat(db, data, params);
+
+    if (data.status === undefined) {
+        data.status = 'member';
+    }
+    if (data.social === undefined) {
+        data.social = {};
+    }
+    delete data.super_admin;
+
+    data = self.formatAlternateContact(data, {});
+
+    if (data.email !== undefined) {
+        data.email = data.email.toLowerCase(); //case insensitive
+        var promiseEmail = checkEmail(db, data.email, {});
+        promiseEmail.then(
+            function() {
+                //if valid email, create the new user
+                var promiseCreate = createActual(db, data, {});
+                promiseCreate.then(
+                    function(ret1) {
+                        //also login the user that was just created (i.e. give them an active session)
+                        var promiseSession = updateSession(db, ret1.user, {});
+                        promiseSession.then(
+                            function(ret2) {
+                                ret1.user = ret2.user;
+                                deferred.resolve(ret1);
+                            },
+                            function(err) {
+                                deferred.reject(err);
+                            }
+                        );
+                    },
+                    function(err) {
+                        deferred.reject(err);
+                    }
+                );
+            },
+            function(err) {
+                deferred.reject(err);
+            }
+        );
+    } else if (data.phone !== undefined) {
+        var promisePhone = checkPhone(db, data.phone, {});
+        promisePhone.then(
+            function() {
+                //if valid phone, create the new user
+                var promiseCreate = createActual(db, data, {});
+                promiseCreate.then(
+                    function(ret1) {
+                        //also login the user that was just created (i.e. give them an active session)
+                        var promiseSession = updateSession(db, ret1.user, {});
+                        promiseSession.then(
+                            function(ret2) {
+                                ret1.user = ret2.user;
+                                deferred.resolve(ret1);
+                            },
+                            function(err) {
+                                deferred.reject(err);
+                            }
+                        );
+                    },
+                    function(err) {
+                        deferred.reject(err);
+                    }
+                );
+            },
+            function(err) {
+                deferred.reject(err);
+            }
+        );
+    } else {
+        ret.code = 1;
+        ret.msg += 'Error: No Email or Phone information given ';
+        deferred.reject(ret);
+    }
+    return deferred.promise;
 };
 
 /**
@@ -211,38 +194,47 @@ Logs in a user
 	@param {Object} user
 **/
 Auth.prototype.login = function(db, data, params) {
-	var deferred = Q.defer();
-	var ret ={code:0, msg:'Auth.login '};
-	
-	data.email =data.email.toLowerCase();		//case insensitive
-	db.user.findOne({email:data.email}, function(err, user) {
-		if(err) {
-			ret.msg +="db.user.findOne Error: "+err;
-			deferred.reject(ret);
-		}
-		else if(!user) {
-			ret.msg ="No user with email '"+data.email+"' exists";
-			deferred.reject(ret);
-		}
-		else {
-			var promiseLogin =loginActual(db, data, user, {});
-			promiseLogin.then(function(ret1) {
-				deferred.resolve(ret1);
-			}, function(err) {
-				deferred.reject(err);
-			});
-			
-			//ensure user is no longer 'guest' status
-			var setObj ={
-				'status':'member'
-			};
-			db.user.update({_id: MongoDBMod.makeIds({'id':user._id})}, {$set: setObj}, function(err, valid) {
-				var dummy =1;
-			});
-		}
-	});
-	
-	return deferred.promise;
+    var deferred = Q.defer();
+    var ret = {
+        code: 0,
+        msg: 'Auth.login '
+    };
+
+    data.email = data.email.toLowerCase(); //case insensitive
+    db.user.findOne({
+        email: data.email
+    }, function(err, user) {
+        if (err) {
+            ret.msg += "db.user.findOne Error: " + err;
+            deferred.reject(ret);
+        } else if (!user) {
+            ret.msg = "No user with email '" + data.email + "' exists";
+            deferred.reject(ret);
+        } else {
+            var promiseLogin = loginActual(db, data, user, {});
+            promiseLogin.then(function(ret1) {
+                deferred.resolve(ret1);
+            }, function(err) {
+                deferred.reject(err);
+            });
+
+            //ensure user is no longer 'guest' status
+            var setObj = {
+                'status': 'member'
+            };
+            db.user.update({
+                _id: MongoDBMod.makeIds({
+                    'id': user._id
+                })
+            }, {
+                $set: setObj
+            }, function(err, valid) {
+                var dummy = 1;
+            });
+        }
+    });
+
+    return deferred.promise;
 };
 
 /**
@@ -257,24 +249,33 @@ A session / user login is stored by a key pair of the user's id and a session id
 	@param {Object} user
 **/
 Auth.prototype.logout = function(db, data, params) {
-	var deferred = Q.defer();
-	var ret ={code:0, msg:'Auth.logout '};
-	
-	db.user.update({_id: MongoDBMod.makeIds({'id': data.user_id}) }, {$set: {sess_id:''}}, function(err, user) {
-		if(err) {
-			ret.msg +='Error: '+err;
-			deferred.reject(ret);
-		}
-		else if(!user) {
-			ret.msg +='Invalid user ';
-			deferred.reject(ret);
-		}
-		else if(user) {
-			deferred.resolve(ret);
-		}
-	});
-	
-	return deferred.promise;
+    var deferred = Q.defer();
+    var ret = {
+        code: 0,
+        msg: 'Auth.logout '
+    };
+
+    db.user.update({
+        _id: MongoDBMod.makeIds({
+            'id': data.user_id
+        })
+    }, {
+        $set: {
+            sess_id: ''
+        }
+    }, function(err, user) {
+        if (err) {
+            ret.msg += 'Error: ' + err;
+            deferred.reject(ret);
+        } else if (!user) {
+            ret.msg += 'Invalid user ';
+            deferred.reject(ret);
+        } else if (user) {
+            deferred.resolve(ret);
+        }
+    });
+
+    return deferred.promise;
 };
 
 /**
@@ -290,25 +291,32 @@ A session / user login is stored by a key pair of the user's id and a session id
 	@param {Object} user
 **/
 Auth.prototype.checkLogin = function(db, data, params) {
-	var deferred = Q.defer();
-	var ret ={code:0, msg:'Auth.checkLogin ', user:false};
-	
-	db.user.findOne({_id: MongoDBMod.makeIds({'id':data.user_id}), sess_id:data.sess_id}, function(err, user) {
-		if(err) {
-			ret.msg +='Error: '+err;
-			deferred.reject(ret);
-		}
-		else if(!user) {
-			ret.msg ="Invalid sess_id and user_id combination";
-			deferred.reject(ret);
-		}
-		else if(user) {
-			ret.user =user;
-			deferred.resolve(ret);
-		}
-	});
-	
-	return deferred.promise;
+    var deferred = Q.defer();
+    var ret = {
+        code: 0,
+        msg: 'Auth.checkLogin ',
+        user: false
+    };
+
+    db.user.findOne({
+        _id: MongoDBMod.makeIds({
+            'id': data.user_id
+        }),
+        sess_id: data.sess_id
+    }, function(err, user) {
+        if (err) {
+            ret.msg += 'Error: ' + err;
+            deferred.reject(ret);
+        } else if (!user) {
+            ret.msg = "Invalid sess_id and user_id combination";
+            deferred.reject(ret);
+        } else if (user) {
+            ret.user = user;
+            deferred.resolve(ret);
+        }
+    });
+
+    return deferred.promise;
 };
 
 /**
@@ -322,60 +330,71 @@ Creates and emails a reset key to the user
 	@param {Boolean} true on success
 **/
 Auth.prototype.forgotPassword = function(db, data, params) {
-	var deferred = Q.defer();
-	var ret ={code:0, msg:'Auth.forgotPassword '};
-	
-	data.email =data.email.toLowerCase();		//case insensitive
-	db.user.findOne({email: data.email}, function(err, user) {
-		if(err) {
-			ret.msg +='Error: '+err;
-			deferred.reject(ret);
-		}
-		else if(!user) {
-			ret.msg ="No user exists with this email";
-			deferred.reject(ret);
-		}
-		else {
-			var resetKey =StringMod.random(6, {'type':'readable'});
-			//use "user.email" to avoid ambiguity between whether passed in value was username (_id) or email
-			db.user.update({email: user.email}, {$set: {'password_reset_key':resetKey}}, function(err, valid) {
-				if(err) {
-					ret.msg +='Error: '+err;
-					deferred.reject(ret);
-				}
-				else if(!valid) {
-					ret.msg +='Not valid';
-					deferred.reject(ret);
-				}
-				else {
-					// fire and forget; this is an async call, but we're not concerned with success
-					// @todo: add logging for send failures
-					if(Emailer){
-						var emailParams = {
-							to: [
-								{
-									email: user.email
-								}
-							],
-							subject: 'Forgot Password Reset'
-						};
-						var templateParams = {
-							email: user.email,
-							reset_key: resetKey
-						};
-						// Emailer.sendTemplate('passwordReset', emailParams, templateParams);
-						Emailer.send({template: 'passwordReset', templateParams: templateParams, emailParams: emailParams});
-						ret.msg ="Email sent with reset instructions!";
-					} else {
-						ret.msg ="WARNING: Auth module cannot send email since emailer is not configured";
-					}
-					deferred.resolve(ret);
-				}
-			});
-		}
-	});
-	
-	return deferred.promise;
+    var deferred = Q.defer();
+    var ret = {
+        code: 0,
+        msg: 'Auth.forgotPassword '
+    };
+
+    data.email = data.email.toLowerCase(); //case insensitive
+    db.user.findOne({
+        email: data.email
+    }, function(err, user) {
+        if (err) {
+            ret.msg += 'Error: ' + err;
+            deferred.reject(ret);
+        } else if (!user) {
+            ret.msg = "No user exists with this email";
+            deferred.reject(ret);
+        } else {
+            var resetKey = StringMod.random(6, {
+                'type': 'readable'
+            });
+            //use "user.email" to avoid ambiguity between whether passed in value was username (_id) or email
+            db.user.update({
+                email: user.email
+            }, {
+                $set: {
+                    'password_reset_key': resetKey
+                }
+            }, function(err, valid) {
+                if (err) {
+                    ret.msg += 'Error: ' + err;
+                    deferred.reject(ret);
+                } else if (!valid) {
+                    ret.msg += 'Not valid';
+                    deferred.reject(ret);
+                } else {
+                    // fire and forget; this is an async call, but we're not concerned with success
+                    // @todo: add logging for send failures
+                    if (Emailer) {
+                        var emailParams = {
+                            to: [{
+                                email: user.email
+                            }],
+                            subject: 'Forgot Password Reset'
+                        };
+                        var templateParams = {
+                            email: user.email,
+                            reset_key: resetKey
+                        };
+                        // Emailer.sendTemplate('passwordReset', emailParams, templateParams);
+                        Emailer.send({
+                            template: 'passwordReset',
+                            templateParams: templateParams,
+                            emailParams: emailParams
+                        });
+                        ret.msg = "Email sent with reset instructions!";
+                    } else {
+                        ret.msg = "WARNING: Auth module cannot send email since emailer is not configured";
+                    }
+                    deferred.resolve(ret);
+                }
+            });
+        }
+    });
+
+    return deferred.promise;
 };
 
 /**
@@ -391,48 +410,58 @@ Resets password for a user. Also logs in user (gives an active session)
 	@param {Object} user
 **/
 Auth.prototype.resetPassword = function(db, data, params) {
-	var deferred = Q.defer();
-	var ret ={code:0, msg:'Auth.resetPassword ', user:false};
-	
-	data.email =data.email.toLowerCase();		//case insensitive
-	db.user.findOne({email: data.email, password_reset_key:data.reset_key}, function(err, user) {
-		if(err) {
-			ret.msg +="Error: "+err;
-			deferred.reject(ret);
-		}
-		else if(!user) {
-			ret.msg ='Invalid email and reset key combination';
-			deferred.reject(ret);
-		}
-		else {
-			//update user password with new one
-			var passFinal =createPassword(user.password_salt, data.password, {});
-			var resetKey =StringMod.random(16, {});		//invalidate reset key so can't be used again
-			//use "user.email" to avoid ambiguity between if params.email is username (_id) or email
-			db.user.update({email: user.email}, {$set: {'password':passFinal, 'password_reset_key':resetKey}}, function(err, valid) {
-				if(err) {
-					ret.msg +='Error: '+err;
-					deferred.reject(ret);
-				}
-				else if(!valid) {
-					ret.msg +="Not valid";
-					deferred.reject(ret);
-				}
-				else {
-					//also login the user that was just created (i.e. give them an active session)
-					var promiseSession =updateSession(db, user, {});
-					promiseSession.then(function(retSess) {
-						ret.user =retSess.user;
-						deferred.resolve(ret);
-					}, function(err) {
-						deferred.reject(err);
-					});
-				}
-			});
-		}
-	});
-	
-	return deferred.promise;
+    var deferred = Q.defer();
+    var ret = {
+        code: 0,
+        msg: 'Auth.resetPassword ',
+        user: false
+    };
+
+    data.email = data.email.toLowerCase(); //case insensitive
+    db.user.findOne({
+        email: data.email,
+        password_reset_key: data.reset_key
+    }, function(err, user) {
+        if (err) {
+            ret.msg += "Error: " + err;
+            deferred.reject(ret);
+        } else if (!user) {
+            ret.msg = 'Invalid email and reset key combination';
+            deferred.reject(ret);
+        } else {
+            //update user password with new one
+            var passFinal = createPassword(user.password_salt, data.password, {});
+            var resetKey = StringMod.random(16, {}); //invalidate reset key so can't be used again
+            //use "user.email" to avoid ambiguity between if params.email is username (_id) or email
+            db.user.update({
+                email: user.email
+            }, {
+                $set: {
+                    'password': passFinal,
+                    'password_reset_key': resetKey
+                }
+            }, function(err, valid) {
+                if (err) {
+                    ret.msg += 'Error: ' + err;
+                    deferred.reject(ret);
+                } else if (!valid) {
+                    ret.msg += "Not valid";
+                    deferred.reject(ret);
+                } else {
+                    //also login the user that was just created (i.e. give them an active session)
+                    var promiseSession = updateSession(db, user, {});
+                    promiseSession.then(function(retSess) {
+                        ret.user = retSess.user;
+                        deferred.resolve(ret);
+                    }, function(err) {
+                        deferred.reject(err);
+                    });
+                }
+            });
+        }
+    });
+
+    return deferred.promise;
 };
 
 /**
@@ -448,38 +477,48 @@ Changes password for a user
 	@param {Object} user
 **/
 Auth.prototype.changePassword = function(db, data, params) {
-	var deferred = Q.defer();
-	var ret ={code:0, msg:'Auth.changePassword ', user:false};
-	
-	db.user.findOne({ _id:MongoDBMod.makeIds({'id':data.user_id}) }, function(err, user) {
-		if(err) {
-			ret.msg +='Error: '+err;
-			deferred.reject(ret);
-		}
-		else if(!user) {
-			ret.msg +='No user - likely an invalid user_id';
-			deferred.reject(ret);
-		}
-		else {
-			var passFinal =createPassword(user.password_salt, data.new_password, {});
-			db.user.update({_id:user._id}, {$set: {'password':passFinal}}, function(err, valid) {
-				if(err) {
-					ret.msg +='Error: '+err;
-					deferred.reject(ret);
-				}
-				else if(!valid) {
-					ret.msg +='Not valid';
-					deferred.reject(ret);
-				}
-				else {
-					ret.user =user;
-					deferred.resolve(ret);
-				}
-			});
-		}
-	});
-	
-	return deferred.promise;
+    var deferred = Q.defer();
+    var ret = {
+        code: 0,
+        msg: 'Auth.changePassword ',
+        user: false
+    };
+
+    db.user.findOne({
+        _id: MongoDBMod.makeIds({
+            'id': data.user_id
+        })
+    }, function(err, user) {
+        if (err) {
+            ret.msg += 'Error: ' + err;
+            deferred.reject(ret);
+        } else if (!user) {
+            ret.msg += 'No user - likely an invalid user_id';
+            deferred.reject(ret);
+        } else {
+            var passFinal = createPassword(user.password_salt, data.new_password, {});
+            db.user.update({
+                _id: user._id
+            }, {
+                $set: {
+                    'password': passFinal
+                }
+            }, function(err, valid) {
+                if (err) {
+                    ret.msg += 'Error: ' + err;
+                    deferred.reject(ret);
+                } else if (!valid) {
+                    ret.msg += 'Not valid';
+                    deferred.reject(ret);
+                } else {
+                    ret.user = user;
+                    deferred.resolve(ret);
+                }
+            });
+        }
+    });
+
+    return deferred.promise;
 };
 
 /**
@@ -492,33 +531,34 @@ Creates a guest user
 @return {Promise}
 	@param {Object} user
 **/
-Auth.prototype.createGuest = function(db, guest, params)
-{	
-	var deferred =Q.defer();
-	var ret = {'code': 0, 'msg': 'Auth.createGuest ', 'user': {} };
-	
-	var randStr =StringMod.random(20, {});
-	
-	//if social key, allow no email and just create a random/dummy one
-	if(guest.email ===undefined && guest.social !==undefined) {
-		guest.email =randStr+'@email.com';
-	}
-	
-	guest.password = randStr;
-	guest.status = 'guest';
-	var creation_promise = self.create(db, guest, params);
-	creation_promise.then(
-		function(ret1)
-		{
-			ret.user = ret1.user;
-			deferred.resolve(ret);
-		},
-		function(err)
-		{
-			deferred.reject(err);
-		}
-	);
-	return deferred.promise;
+Auth.prototype.createGuest = function(db, guest, params) {
+    var deferred = Q.defer();
+    var ret = {
+        'code': 0,
+        'msg': 'Auth.createGuest ',
+        'user': {}
+    };
+
+    var randStr = StringMod.random(20, {});
+
+    //if social key, allow no email and just create a random/dummy one
+    if (guest.email === undefined && guest.social !== undefined) {
+        guest.email = randStr + '@email.com';
+    }
+
+    guest.password = randStr;
+    guest.status = 'guest';
+    var creation_promise = self.create(db, guest, params);
+    creation_promise.then(
+        function(ret1) {
+            ret.user = ret1.user;
+            deferred.resolve(ret);
+        },
+        function(err) {
+            deferred.reject(err);
+        }
+    );
+    return deferred.promise;
 };
 
 /**
@@ -530,63 +570,56 @@ Takes a user object. Appends the user's email to the user's email_alls and phone
 @return {Promise}
 	@param {Object} user New, updated user object.
 */
-Auth.prototype.formatAlternateContact = function(user, params)
-{
-	var ii;
-	var found;
-	
-	if(user.email !== undefined)
-	{
-		user.email =user.email.toLowerCase();		//ensure lowercase
-		
-		if(user.emails_all === undefined)
-		{
-			user.emails_all = [ { 'email': user.email, 'confirmed': 0, 'primary': 1 } ];
-		}
-		else
-		{
-			found = false;
-			for(ii = 0; ii < user.emails_all.length; ii++)
-			{
-				user.emails_all[ii].email =user.emails_all[ii].email.toLowerCase();		//ensure lowercase
-				if(user.email == user.emails_all[ii].email)
-				{
-					found = true;
-					ii = user.emails_all.length;
-				}
-			}
-			if(found === false)
-			{
-				user.emails_all.push( { 'email': user.email, 'confirmed': 0, 'primary': 1 } );
-			}
-		}
-	}
-	
-	if(user.phone !== undefined)
-	{
-		if(user.phones_all === undefined)
-		{
-			user.phones_all = [user.phone];
-		}
-		else
-		{
-			found = false;
-			for(ii = 0; ii < user.phones_all.length; ii++)
-			{
-				if(user.phone.number == user.phones_all[ii].number)
-				{
-					found = true;
-					ii = user.phones_all.length;
-				}
-			}
-			if(found === false)
-			{
-				user.phones_all.push(user.phone);
-			}
-		}
-	}
-	
-	return user;
+Auth.prototype.formatAlternateContact = function(user, params) {
+    var ii;
+    var found;
+
+    if (user.email !== undefined) {
+        user.email = user.email.toLowerCase(); //ensure lowercase
+
+        if (user.emails_all === undefined) {
+            user.emails_all = [{
+                'email': user.email,
+                'confirmed': 0,
+                'primary': 1
+            }];
+        } else {
+            found = false;
+            for (ii = 0; ii < user.emails_all.length; ii++) {
+                user.emails_all[ii].email = user.emails_all[ii].email.toLowerCase(); //ensure lowercase
+                if (user.email == user.emails_all[ii].email) {
+                    found = true;
+                    ii = user.emails_all.length;
+                }
+            }
+            if (found === false) {
+                user.emails_all.push({
+                    'email': user.email,
+                    'confirmed': 0,
+                    'primary': 1
+                });
+            }
+        }
+    }
+
+    if (user.phone !== undefined) {
+        if (user.phones_all === undefined) {
+            user.phones_all = [user.phone];
+        } else {
+            found = false;
+            for (ii = 0; ii < user.phones_all.length; ii++) {
+                if (user.phone.number == user.phones_all[ii].number) {
+                    found = true;
+                    ii = user.phones_all.length;
+                }
+            }
+            if (found === false) {
+                user.phones_all.push(user.phone);
+            }
+        }
+    }
+
+    return user;
 };
 
 /**
@@ -601,52 +634,49 @@ Checks if a user exists. If not, creates a guest user.
 		@param {Object} user The new user object, if successfully created, or the user's existing database entry (with _id at least), if it's already there.
 		@param {Boolean} already_exists True iff the given user is already in the database.
 **/
-Auth.prototype.userImport = function(db, data, params)
-{	
-	var deferred =Q.defer();
-	var ret = {'code': 0, 'msg': 'Auth.userImport ', 'user': {}, 'already_exists': false };
-	
-	data.user =UserMod.fixPhoneFormat(db, data.user, params);
-	
-	var exists_promise = self.userExists(db, data.user, {});
-	exists_promise.then(
-		function(ret1)
-		{
-			if(ret1.exists === true)
-			{
-				ret.already_exists = true;
-				ret.user = ret1.user;
-				deferred.resolve(ret);
-			}
-			else
-			{
-				var create_promise = self.createGuest(db, data.user, {});
-				create_promise.then(
-					function(ret1)
-					{
-						ret.already_exists = false;
-						ret.user = ret1.user;
-						ret.user._id = ret.user._id.toHexString();
-						deferred.resolve(ret);
-					},
-					function(err)
-					{
-						ret.code = 1;
-						ret.msg += err;
-						deferred.reject(ret);
-					}
-				);
-			}
-		},
-		function(err)
-		{
-			ret.code = 1;
-			ret.msg += err;
-			deferred.reject(ret);
-		}
-	);
-	
-	return deferred.promise;
+Auth.prototype.userImport = function(db, data, params) {
+    var deferred = Q.defer();
+    var ret = {
+        'code': 0,
+        'msg': 'Auth.userImport ',
+        'user': {},
+        'already_exists': false
+    };
+
+    data.user = UserMod.fixPhoneFormat(db, data.user, params);
+
+    var exists_promise = self.userExists(db, data.user, {});
+    exists_promise.then(
+        function(ret1) {
+            if (ret1.exists === true) {
+                ret.already_exists = true;
+                ret.user = ret1.user;
+                deferred.resolve(ret);
+            } else {
+                var create_promise = self.createGuest(db, data.user, {});
+                create_promise.then(
+                    function(ret1) {
+                        ret.already_exists = false;
+                        ret.user = ret1.user;
+                        ret.user._id = ret.user._id.toHexString();
+                        deferred.resolve(ret);
+                    },
+                    function(err) {
+                        ret.code = 1;
+                        ret.msg += err;
+                        deferred.reject(ret);
+                    }
+                );
+            }
+        },
+        function(err) {
+            ret.code = 1;
+            ret.msg += err;
+            deferred.reject(ret);
+        }
+    );
+
+    return deferred.promise;
 };
 
 /**
@@ -662,65 +692,61 @@ Checks if a user exists. If not, creates a guest user.
 	@param {Object} ret
 		@param {Array} users Array of the new user objects, if successfully created, or the users' existing database entries (with at least the _id field), if they're already there.
 **/
-Auth.prototype.usersImport = function(db, data, params)
-{	
-	var deferred =Q.defer();
-	var ret = {'code': 0, 'msg': 'Auth.usersImport ', 'users': [] };
-	var FollowMod = require(pathParts.controllers+'follow/follow.js');
-	
-	async.forEach(data.users,
-		function(user, callback)
-		{
-			var import_promise = self.userImport(db, {'user': user}, params);
-			import_promise.then(
-				function(ret1)
-				{
-					ret.users.push(ret1.user);
-					callback(false);
-				},
-				function(ret1)
-				{
-					callback(true);
-				}
-			);
-		},
-		function(err)
-		{
-			if(err)
-			{
-				ret.code = 1;
-				deferred.reject(ret);
-			}
-			else
-			{
-				if(data.user_id !== undefined && data.follow === 1)
-				{
-					var follow_promise = FollowMod.follow(db, {'user_id': data.user_id, 'followed': ret.users}, params);
-					follow_promise.then(
-						function(ret1)
-						{
-							ret.code = 0;
-							ret.msg += ret1.msg;
-							deferred.resolve(ret);
-						},
-						function(ret1)
-						{
-							ret.code = 1;
-							ret.msg += ret1.msg;
-							deferred.reject(ret);
-						}
-					);
-				}
-				else
-				{
-					ret.code = 1;
-					deferred.resolve(ret);
-				}
-			}
-		}
-	);
-	
-	return deferred.promise;
+Auth.prototype.usersImport = function(db, data, params) {
+    var deferred = Q.defer();
+    var ret = {
+        'code': 0,
+        'msg': 'Auth.usersImport ',
+        'users': []
+    };
+    var FollowMod = require(pathParts.controllers + 'follow/follow.js');
+
+    async.forEach(data.users,
+        function(user, callback) {
+            var import_promise = self.userImport(db, {
+                'user': user
+            }, params);
+            import_promise.then(
+                function(ret1) {
+                    ret.users.push(ret1.user);
+                    callback(false);
+                },
+                function(ret1) {
+                    callback(true);
+                }
+            );
+        },
+        function(err) {
+            if (err) {
+                ret.code = 1;
+                deferred.reject(ret);
+            } else {
+                if (data.user_id !== undefined && data.follow === 1) {
+                    var follow_promise = FollowMod.follow(db, {
+                        'user_id': data.user_id,
+                        'followed': ret.users
+                    }, params);
+                    follow_promise.then(
+                        function(ret1) {
+                            ret.code = 0;
+                            ret.msg += ret1.msg;
+                            deferred.resolve(ret);
+                        },
+                        function(ret1) {
+                            ret.code = 1;
+                            ret.msg += ret1.msg;
+                            deferred.reject(ret);
+                        }
+                    );
+                } else {
+                    ret.code = 1;
+                    deferred.resolve(ret);
+                }
+            }
+        }
+    );
+
+    return deferred.promise;
 };
 
 
@@ -737,143 +763,136 @@ Check if a user exists in the database, based on the given _id, email, or phone 
 	@param {Number} code
 	@param {String} msg
 **/
-Auth.prototype.userExists = function(db, user, params)
-{
-	var deferred = Q.defer();
-	var ret = {code:0, msg:'Auth.userExists ', 'exists': false, 'user': {}};
-	
-	var xx, query, valid =false;
-	
-	//DRY phone checking function
-	var checkPhone = function()
-	{
-	
-		user =UserMod.fixPhoneFormat(db, user, params);
-		
-		var phone_promise = UserMod.searchByPhone(db, {'phone': user.phone, 'fields': {'_id': 1}}, {});
-		phone_promise.then(
-			function(ret1)
-			{
-				if(ret1.exists)
-				{
-					ret.exists = true;
-					ret.user = ret1.user;
-					ret.user._id = ret.user._id.toHexString();
-					deferred.resolve(ret);
-				}
-				else
-				{
-					ret.exists = false;
-					deferred.resolve(ret);
-				}
-			},
-			function(ret1)
-			{
-				//Error occurred
-				console.log(ret1.msg);
-				deferred.reject(ret);
-			}
-		);
-	};
-	
-	
-	//If the user already has an _id, it must exist. We're done.
-	if(user._id !== undefined)
-	{
-		valid =true;
-		ret.user = user;
-		ret.exists = true;
-		deferred.resolve(ret);
-	}
-	//Id may also be under the user_id field, allow both
-	else if(user.user_id !== undefined)
-	{
-		valid =true;
-		ret.user = user;
-		ret.user._id = ret.user.user_id;
-		ret.exists = true;
-		deferred.resolve(ret);
-	}
-	//No _id field. Check email
-	else if(user.email !== undefined)
-	{
-		valid =true;
-		var email_promise = UserMod.searchByEmail(db, {'email': user.email, 'fields': {'_id': 1}}, {});
-		email_promise.then(
-			function(ret1)
-			{
-				if(ret1.exists)
-				{
-					ret.exists = true;
-					ret.user = ret1.user;
-					ret.user._id = ret.user._id.toHexString();
-					deferred.resolve(ret);
-				}
-				else if(user.phone !== undefined)
-				{
-					checkPhone();
-				}
-				else
-				{
-					ret.exists = false;
-					deferred.resolve(ret);
-				}
-			},
-			function(ret1)
-			{
-				//Error occurred
-				console.log(ret1.msg);
-				deferred.reject(ret);
-			}
-		);
-	}
-	else if(user.phone !== undefined)
-	{
-		valid =true;
-		checkPhone();
-	}
-	else if(user.social !==undefined) {
-		query ={
-			$or: []
-		};
-		var key, curPushObj;
-		for(xx in user.social) {
-			if(user.social[xx].id !==undefined) {
-				key ='social.'+xx+'.id';
-				curPushObj ={};
-				curPushObj[key] =user.social[xx].id;		//MUST set it this way otherwise will look for a 'key' field!!
-				query.$or.push(curPushObj);
-			}
-		}
-		if(query.$or.length >0) {
-			valid =true;
-			db.user.findOne(query, function(err, record) {
-				if(err) {
-					ret.code =1;
-					ret.msg +=err;
-					deferred.reject(ret);
-				}
-				else if(!record) {
-					ret.exists = false;
-					deferred.resolve(ret);
-				}
-				else {
-					ret.exists = true;
-					ret.user =record;
-					ret.user._id = ret.user._id.toHexString();
-					deferred.resolve(ret);
-				}
-			});
-		}
-	}
-	
-	if(!valid) {
-		//No data given. Impossible to check if the user exists.
-		console.log("Auth.userExists: Error: No _id, email, or phone given. Cannot check if user exists");
-		deferred.reject(ret);		
-	}
-	
-	return deferred.promise;
+Auth.prototype.userExists = function(db, user, params) {
+    var deferred = Q.defer();
+    var ret = {
+        code: 0,
+        msg: 'Auth.userExists ',
+        'exists': false,
+        'user': {}
+    };
+
+    var xx, query, valid = false;
+
+    //DRY phone checking function
+    var checkPhone = function() {
+
+        user = UserMod.fixPhoneFormat(db, user, params);
+
+        var phone_promise = UserMod.searchByPhone(db, {
+            'phone': user.phone,
+            'fields': {
+                '_id': 1
+            }
+        }, {});
+        phone_promise.then(
+            function(ret1) {
+                if (ret1.exists) {
+                    ret.exists = true;
+                    ret.user = ret1.user;
+                    ret.user._id = ret.user._id.toHexString();
+                    deferred.resolve(ret);
+                } else {
+                    ret.exists = false;
+                    deferred.resolve(ret);
+                }
+            },
+            function(ret1) {
+                //Error occurred
+                console.log(ret1.msg);
+                deferred.reject(ret);
+            }
+        );
+    };
+
+
+    //If the user already has an _id, it must exist. We're done.
+    if (user._id !== undefined) {
+        valid = true;
+        ret.user = user;
+        ret.exists = true;
+        deferred.resolve(ret);
+    }
+    //Id may also be under the user_id field, allow both
+    else if (user.user_id !== undefined) {
+        valid = true;
+        ret.user = user;
+        ret.user._id = ret.user.user_id;
+        ret.exists = true;
+        deferred.resolve(ret);
+    }
+    //No _id field. Check email
+    else if (user.email !== undefined) {
+        valid = true;
+        var email_promise = UserMod.searchByEmail(db, {
+            'email': user.email,
+            'fields': {
+                '_id': 1
+            }
+        }, {});
+        email_promise.then(
+            function(ret1) {
+                if (ret1.exists) {
+                    ret.exists = true;
+                    ret.user = ret1.user;
+                    ret.user._id = ret.user._id.toHexString();
+                    deferred.resolve(ret);
+                } else if (user.phone !== undefined) {
+                    checkPhone();
+                } else {
+                    ret.exists = false;
+                    deferred.resolve(ret);
+                }
+            },
+            function(ret1) {
+                //Error occurred
+                console.log(ret1.msg);
+                deferred.reject(ret);
+            }
+        );
+    } else if (user.phone !== undefined) {
+        valid = true;
+        checkPhone();
+    } else if (user.social !== undefined) {
+        query = {
+            $or: []
+        };
+        var key, curPushObj;
+        for (xx in user.social) {
+            if (user.social[xx].id !== undefined) {
+                key = 'social.' + xx + '.id';
+                curPushObj = {};
+                curPushObj[key] = user.social[xx].id; //MUST set it this way otherwise will look for a 'key' field!!
+                query.$or.push(curPushObj);
+            }
+        }
+        if (query.$or.length > 0) {
+            valid = true;
+            db.user.findOne(query, function(err, record) {
+                if (err) {
+                    ret.code = 1;
+                    ret.msg += err;
+                    deferred.reject(ret);
+                } else if (!record) {
+                    ret.exists = false;
+                    deferred.resolve(ret);
+                } else {
+                    ret.exists = true;
+                    ret.user = record;
+                    ret.user._id = ret.user._id.toHexString();
+                    deferred.resolve(ret);
+                }
+            });
+        }
+    }
+
+    if (!valid) {
+        //No data given. Impossible to check if the user exists.
+        console.log("Auth.userExists: Error: No _id, email, or phone given. Cannot check if user exists");
+        deferred.reject(ret);
+    }
+
+    return deferred.promise;
 };
 
 /**
@@ -893,88 +912,93 @@ Auth.prototype.userExists = function(db, user, params)
 		@param {Object} user The new user object, if successfully created, or the user's existing database entry (with _id at least), if it's already there.
 		@param {Boolean} already_exists True iff the given user is already in the database.
 **/
-Auth.prototype.socialLogin = function(db, data, params)
-{	
-	var deferred =Q.defer();
-	var ret = {'code': 0, 'msg': 'Auth.socialLogin ', 'user': {}, 'already_exists': false };
-	
-	//add social data into user.social key
-	if(data.user.social ===undefined) {
-		data.user.social ={};
-	}
-	data.user.social[data.type] ={
-		id: data.socialData.id
-	};
-	
-	var import_promise = self.userImport(db, {'user': data.user}, {});
-	import_promise.then(
-		function(ret1)
-		{
-			ret.already_exists = ret1.already_exists;
-			ret.user = ret1.user;
-			
-			if(ret.user.social === undefined)
-			{
-				ret.user.social = {};
-			}
-			
-			var set_obj = {};
-			set_obj["social." + data.type] = data.socialData;
-			
-			//update other fields (i.e. name, email) too IF not already set. //@todo - extend existing fields and/or add to emails array with new ones?
-			var xx;
-			for(xx in data.user) {
-				if(ret.user[xx] ===undefined || !ret.user[xx]) {
-					set_obj[xx] =data.user[xx];
-				}
-			}
-			
-			db.user.update({_id:MongoDBMod.makeIds({'id':ret1.user._id}) }, {$set: set_obj}, function(err, valid)
-			{
-				if(err)
-				{
-					ret.code = 1;
-					ret.msg +='Error: '+err;
-					deferred.reject(ret);
-				}
-				else if (!valid)
-				{
-					ret.code = 2;
-					ret.msg +='Not valid ';
-					deferred.reject(ret);
-				}
-				else
-				{
-					ret.code = 0;
-					ret.msg +='User updated';
-					//in case of update, need to re-read user to get all info (esp. sess_id)
-					// ret.user.social[data.type] = data.socialData;
-					UserMod.read(db, {_id: ret.user._id}, {})
-					.then(function(retUser) {
-						ret.user =retUser.result;
-						//also need to update session
-						var promiseSession =updateSession(db, ret.user, {});
-						promiseSession.then(function(ret1) {
-							ret.user =ret1.user;
-							deferred.resolve(ret);
-						}, function(err) {
-							deferred.reject(err);
-						});
-					}, function(retErr) {
-						deferred.reject(retErr);
-					});
-				}
-			});
-		},
-		function(err)
-		{
-			ret.code = 1;
-			ret.msg += err;
-			deferred.reject(ret);
-		}
-	);
-	
-	return deferred.promise;
+Auth.prototype.socialLogin = function(db, data, params) {
+    var deferred = Q.defer();
+    var ret = {
+        'code': 0,
+        'msg': 'Auth.socialLogin ',
+        'user': {},
+        'already_exists': false
+    };
+
+    //add social data into user.social key
+    if (data.user.social === undefined) {
+        data.user.social = {};
+    }
+    data.user.social[data.type] = {
+        id: data.socialData.id
+    };
+
+    var import_promise = self.userImport(db, {
+        'user': data.user
+    }, {});
+    import_promise.then(
+        function(ret1) {
+            ret.already_exists = ret1.already_exists;
+            ret.user = ret1.user;
+
+            if (ret.user.social === undefined) {
+                ret.user.social = {};
+            }
+
+            var set_obj = {};
+            set_obj["social." + data.type] = data.socialData;
+
+            //update other fields (i.e. name, email) too IF not already set. //@todo - extend existing fields and/or add to emails array with new ones?
+            var xx;
+            for (xx in data.user) {
+                if (ret.user[xx] === undefined || !ret.user[xx]) {
+                    set_obj[xx] = data.user[xx];
+                }
+            }
+
+            db.user.update({
+                _id: MongoDBMod.makeIds({
+                    'id': ret1.user._id
+                })
+            }, {
+                $set: set_obj
+            }, function(err, valid) {
+                if (err) {
+                    ret.code = 1;
+                    ret.msg += 'Error: ' + err;
+                    deferred.reject(ret);
+                } else if (!valid) {
+                    ret.code = 2;
+                    ret.msg += 'Not valid ';
+                    deferred.reject(ret);
+                } else {
+                    ret.code = 0;
+                    ret.msg += 'User updated';
+                    //in case of update, need to re-read user to get all info (esp. sess_id)
+                    // ret.user.social[data.type] = data.socialData;
+                    UserMod.read(db, {
+                        _id: ret.user._id
+                    }, {})
+                        .then(function(retUser) {
+                            ret.user = retUser.result;
+                            //also need to update session
+                            var promiseSession = updateSession(db, ret.user, {});
+                            promiseSession.then(function(ret1) {
+                                ret.user = ret1.user;
+                                deferred.resolve(ret);
+                            }, function(err) {
+                                deferred.reject(err);
+                            });
+                        }, function(retErr) {
+                            deferred.reject(retErr);
+                        });
+                }
+            });
+        },
+        function(err) {
+            ret.code = 1;
+            ret.msg += err;
+            deferred.reject(ret);
+        }
+    );
+
+    return deferred.promise;
 };
 
 /**
@@ -990,31 +1014,34 @@ Auth.prototype.socialLogin = function(db, data, params)
 */
 //Auth.prototype.checkEmail =function(email, params) {
 function checkEmail(db, email, params) {
-	var deferred =Q.defer();
-	var ret ={code: 0, msg:'checkEmail '};
-	
-	var email_promise = UserMod.searchByEmail(db, {'email': email, 'fields': {'_id': 1} }, params);
-	email_promise.then(
-		function(ret1)
-		{
-			if(ret1.exists)
-			{
-				ret.code = 1;
-				deferred.reject(ret);
-			}
-			else
-			{
-				ret.code = 0;
-				deferred.resolve(ret);
-			}
-		},
-		function(ret1)
-		{
-			console.log(ret1);
-			deferred.reject(ret1);
-		}
-	);
-	/*
+    var deferred = Q.defer();
+    var ret = {
+        code: 0,
+        msg: 'checkEmail '
+    };
+
+    var email_promise = UserMod.searchByEmail(db, {
+        'email': email,
+        'fields': {
+            '_id': 1
+        }
+    }, params);
+    email_promise.then(
+        function(ret1) {
+            if (ret1.exists) {
+                ret.code = 1;
+                deferred.reject(ret);
+            } else {
+                ret.code = 0;
+                deferred.resolve(ret);
+            }
+        },
+        function(ret1) {
+            console.log(ret1);
+            deferred.reject(ret1);
+        }
+    );
+    /*
 	var email = data.email.toLowerCase();		//case insensitive
 	db.user.findOne({email: email}, function(err, user) {
 		if(err)
@@ -1036,7 +1063,7 @@ function checkEmail(db, email, params) {
 		}
 	});
 	*/
-	return deferred.promise;
+    return deferred.promise;
 }
 
 /**
@@ -1050,34 +1077,36 @@ function checkEmail(db, email, params) {
 		@param {Boolean} code 0 if phone is okay to be used (i.e. doesn't already exist)
 		@param {String} msg
 */
-function checkPhone(db, phone, params)
-{
-	var deferred =Q.defer();
-	var ret ={code: 0, msg:'checkPhone '};
+function checkPhone(db, phone, params) {
+    var deferred = Q.defer();
+    var ret = {
+        code: 0,
+        msg: 'checkPhone '
+    };
 
-	var phone_promise = UserMod.searchByPhone(db, {'phone': phone, 'fields': {'_id': 1} }, params);
-	phone_promise.then(
-		function(ret1)
-		{
-			if(ret1.exists)
-			{
-				ret.code = 1;
-				deferred.reject(ret);
-			}
-			else
-			{
-				ret.code = 0;
-				deferred.resolve(ret);
-			}
-		},
-		function(ret1)
-		{
-			console.log(ret1);
-			deferred.reject(ret1);
-		}
-	);
-	
-	return deferred.promise;
+    var phone_promise = UserMod.searchByPhone(db, {
+        'phone': phone,
+        'fields': {
+            '_id': 1
+        }
+    }, params);
+    phone_promise.then(
+        function(ret1) {
+            if (ret1.exists) {
+                ret.code = 1;
+                deferred.reject(ret);
+            } else {
+                ret.code = 0;
+                deferred.resolve(ret);
+            }
+        },
+        function(ret1) {
+            console.log(ret1);
+            deferred.reject(ret1);
+        }
+    );
+
+    return deferred.promise;
 }
 
 /**
@@ -1085,27 +1114,30 @@ function checkPhone(db, phone, params)
 @method createActual
 */
 function createActual(db, data, params) {
-	var deferred =Q.defer();
-	var ret ={code: 0, msg:'createActual ', user:false};
-	
-	data.password_salt =StringMod.random(16,{});
-	data.password =createPassword(data.password_salt, data.password, {});
-	delete data.password_confirm;
-	data.sess_id =StringMod.random(16,{});
-	data.signup = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
-	db.user.insert(data, function(err, user) {
-		if(err) {
-			ret.msg +='Error: '+err;
-			deferred.reject(ret);
-		}
-		else {
-			user =user[0];		//return value is an array but just want the one we inserted as an object
-			ret.user =user;
-			deferred.resolve(ret);
-		}
-	});
-	
-	return deferred.promise;
+    var deferred = Q.defer();
+    var ret = {
+        code: 0,
+        msg: 'createActual ',
+        user: false
+    };
+
+    data.password_salt = StringMod.random(16, {});
+    data.password = createPassword(data.password_salt, data.password, {});
+    delete data.password_confirm;
+    data.sess_id = StringMod.random(16, {});
+    data.signup = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+    db.user.insert(data, function(err, user) {
+        if (err) {
+            ret.msg += 'Error: ' + err;
+            deferred.reject(ret);
+        } else {
+            user = user[0]; //return value is an array but just want the one we inserted as an object
+            ret.user = user;
+            deferred.resolve(ret);
+        }
+    });
+
+    return deferred.promise;
 }
 
 /**
@@ -1117,9 +1149,9 @@ Creates an encrypted password from a salt and (user input / plain text) password
 @return {String} encrypted password
 */
 function createPassword(salt, password, params) {
-	var pass1 =crypto.createHash('sha1').update(salt+password).digest('hex');
-	//console.log(salt+" "+password+" "+pass1);
-	return pass1;
+    var pass1 = crypto.createHash('sha1').update(salt + password).digest('hex');
+    //console.log(salt+" "+password+" "+pass1);
+    return pass1;
 }
 
 /**
@@ -1135,22 +1167,25 @@ Takes a user (looked up from the database) and user input password and then encr
 	@param {Object} user User info IF successful login
 */
 function loginActual(db, data, user, params) {
-	var deferred =Q.defer();
-	var ret ={code:0, msg:'loginActual: ', user:false};
-	var validPass =checkPassword(data, user, params);
-	if(!validPass) {
-		ret.msg ="Invalid password";
-		deferred.reject(ret);
-	}
-	else {
-		var promiseSession =updateSession(db, user, {});
-		promiseSession.then(function(ret1) {
-			deferred.resolve(ret1);
-		}, function(err) {
-			deferred.reject(err);
-		});
-	}
-	return deferred.promise;
+    var deferred = Q.defer();
+    var ret = {
+        code: 0,
+        msg: 'loginActual: ',
+        user: false
+    };
+    var validPass = checkPassword(data, user, params);
+    if (!validPass) {
+        ret.msg = "Invalid password";
+        deferred.reject(ret);
+    } else {
+        var promiseSession = updateSession(db, user, {});
+        promiseSession.then(function(ret1) {
+            deferred.resolve(ret1);
+        }, function(err) {
+            deferred.reject(err);
+        });
+    }
+    return deferred.promise;
 }
 
 /**
@@ -1162,43 +1197,50 @@ function loginActual(db, data, user, params) {
 	@param {Object} user User info now with active session id (and last_login is updated as well)
 */
 function updateSession(db, user, params) {
-	var deferred =Q.defer();
-	var ret ={code:0, msg:'updateSession: ', user:false};
-	//update session info in database
-	user.sess_id =StringMod.random(16,{});
-	user.last_login =moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
-	
-	//may not have email so need to check by _id too
-	var valid =true;
-	var query ={};
-	if(user.email !==undefined) {
-		query.email =user.email;
-	}
-	else if(user._id !==undefined) {
-		query._id =MongoDBMod.makeIds({'id': user._id});
-	}
-	else {
-		valid =false;
-		ret.msg +='A valid user email or _id must be specified ';
-		deferred.reject(ret);
-	}
-	if(valid) {
-		db.user.update(query, {$set: {sess_id:user.sess_id, last_login:user.last_login} }, function(err, valid) {
-			if(err) {
-				ret.msg +='Error: '+err;
-				deferred.reject(ret);
-			}
-			else if(!valid) {
-				ret.msg +='Invalid query ';
-				deferred.reject(ret);
-			}
-			else {
-				ret.user =user;
-				deferred.resolve(ret);
-			}
-		});
-	}
-	return deferred.promise;
+    var deferred = Q.defer();
+    var ret = {
+        code: 0,
+        msg: 'updateSession: ',
+        user: false
+    };
+    //update session info in database
+    user.sess_id = StringMod.random(16, {});
+    user.last_login = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+
+    //may not have email so need to check by _id too
+    var valid = true;
+    var query = {};
+    if (user.email !== undefined) {
+        query.email = user.email;
+    } else if (user._id !== undefined) {
+        query._id = MongoDBMod.makeIds({
+            'id': user._id
+        });
+    } else {
+        valid = false;
+        ret.msg += 'A valid user email or _id must be specified ';
+        deferred.reject(ret);
+    }
+    if (valid) {
+        db.user.update(query, {
+            $set: {
+                sess_id: user.sess_id,
+                last_login: user.last_login
+            }
+        }, function(err, valid) {
+            if (err) {
+                ret.msg += 'Error: ' + err;
+                deferred.reject(ret);
+            } else if (!valid) {
+                ret.msg += 'Invalid query ';
+                deferred.reject(ret);
+            } else {
+                ret.user = user;
+                deferred.resolve(ret);
+            }
+        });
+    }
+    return deferred.promise;
 }
 
 /**
@@ -1212,13 +1254,12 @@ function updateSession(db, user, params) {
 @return {Boolean} True if passwords match
 */
 function checkPassword(data, user, params) {
-	var password =crypto.createHash('sha1').update(user.password_salt+data.password).digest('hex');
-	if(password ==user.password) {		//match
-		return true;
-	}
-	else {
-		return false;
-	}
+    var password = crypto.createHash('sha1').update(user.password_salt + data.password).digest('hex');
+    if (password == user.password) { //match
+        return true;
+    } else {
+        return false;
+    }
 }
 
 module.exports = new Auth({});

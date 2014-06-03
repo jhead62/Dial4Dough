@@ -132,6 +132,11 @@ factory('appNavConfig', ['appConfig', 'jrgArray',
                         self.historyBack({});
                     }
                 };
+                this.components.loginButton = {
+                    click: function() {
+                        self.historyBack({});
+                    }
+                };
 
                 this.components.headerCentered = {
                     template: this.paths.templates.headerCentered,
@@ -146,9 +151,10 @@ factory('appNavConfig', ['appConfig', 'jrgArray',
                                 href: this.paths.appPathLink + ''
                             },
                             this.components.pricingButton, {
-                                html: "value",
+                                html: "Pricing",
                                 href: this.paths.appPathLink + 'pricing'
-                            }, {
+                            },
+                            this.components.loginButton, {
                                 //icon: 'fa fa-sign-in',
                                 html: 'Login',
                                 href: this.paths.appPathLink + 'login'
@@ -156,15 +162,16 @@ factory('appNavConfig', ['appConfig', 'jrgArray',
                         ],
 
                         right: [{
-                                //icon: 'fa fa-sign-in',
-                                //iconHtml: 'Login',
-                                //href: this.paths.appPathLink + 'login'
+                                // icon: 'fa fa-sign-in',
+                                // html: 'Signup',
+                                // //iconHtml: 'Register',
+                                // href: this.paths.appPathLink + 'signup'
                             }
                             //now toggling this in HeaderCtrl based on logged in status
                             // {
-                            // icon: 'fa fa-sign-out',
-                            // iconHtml: 'Logout',
-                            // href: this.paths.appPathLink+'logout'
+                            //     //icon: 'fa fa-sign-out',
+                            //     iconHtml: 'Logout',
+                            //     href: this.paths.appPathLink + 'logout'
                             // }
                         ]
                     }

@@ -11,11 +11,11 @@ Uses the appropriately installed text/SMS method (i.e. Twilio 3rd party service)
 
 'use strict';
 
-var dependency =require('../../../dependency.js');
-var pathParts =dependency.buildPaths(__dirname, {});
+var dependency = require('../../../dependency.js');
+var pathParts = dependency.buildPaths(__dirname, {});
 
 // include your texting service here
-// var TextTwilio =require(pathParts.services+'text/twilio/textTwilio.js');
+var TextTwilio = require(pathParts.services + 'text/twilio/textTwilio.js');
 
 var self;
 
@@ -23,7 +23,7 @@ var self;
 @param {Object} opts
 */
 function Texter(opts) {
-	self =this;
+    self = this;
 }
 
 /**
@@ -35,9 +35,9 @@ function Texter(opts) {
 		@param {String} text
 @return NONE
 */
-Texter.prototype.send =function(opts) {
-	//call your texting service here
-	// TextTwilio.send(opts);
+Texter.prototype.send = function(opts) {
+    //call your texting service here
+    // TextTwilio.send(opts);
 };
 
 module.exports = new Texter({});

@@ -91,7 +91,7 @@ config(['$routeProvider', '$locationProvider', 'appConfigProvider', '$compilePro
 
 
 
-    $routeProvider.when(appPathRoute + 'login', {
+        $routeProvider.when(appPathRoute + 'login', {
             templateUrl: pagesPath + 'login/login.html',
             resolve: {
                 auth: function(appAuth) {
@@ -119,10 +119,20 @@ config(['$routeProvider', '$locationProvider', 'appConfigProvider', '$compilePro
             templateUrl: pagesPath + 'userDelete/user-delete.html',
             resolve: {
                 auth: function(appAuth) {
-                    return appAuth.checkSess({});
+                    appAuth.checkSess();
                 }
             }
         });
+
+        // appAuth.checkSess({
+        //     auth: {
+        //         loggedIn: {},       //require user to be logged in to view this page
+        //         //require user to be a member (user.status =='member') to view this page and if NOT, redirect user to 'auth-member' page
+        //         member: {
+        //             redirect: 'auth-member'
+        //         }
+        //     }
+        // });
 
         $routeProvider.when(appPathRoute + 'password-reset', {
             templateUrl: pagesPath + 'passwordReset/password-reset.html',

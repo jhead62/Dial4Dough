@@ -8,8 +8,8 @@
     "operatingSystemComment": "One of: 'windows', 'mac', 'linux'",
     "forever": 0,
     "app": {
-        "name": "myproject",
-        "title": "My Project"
+        "name": "D4dDough",
+        "title": "dial4dough"
     },
     "platform": "",
     "server": {
@@ -34,7 +34,7 @@
         "frontendUseCors": 0
     },
     "db": {
-        "fullURI": "",
+        "fullURI": "mongodb://jhead12:mc1282@ds061787.mongolab.com:61787/myproject",
         "host": "localhost",
         "port": 27017,
         "database": "myproject",
