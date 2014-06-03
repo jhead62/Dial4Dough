@@ -219,28 +219,28 @@ factory('appNavConfig', ['appConfig', 'jrgArray',
                 //site-specific
                 //CUSTOM nav definitions
                 //login
-                this.pages.login = {
-                    header: {
-                        template: this.paths.templates.headerCentered,
-                        title: {
-                            html: '&nbsp;'
-                        },
-                        buttons: {
-                            left: [{
-                                html: "&nbsp;"
-                            }],
-                            right: [{
-                                html: "&nbsp;"
-                            }]
-                        }
+            this.pages.login = {
+                header: {
+                    template: this.paths.templates.headerCentered,
+                    title: {
+                        html: '&nbsp;'
                     },
-                    footer: {
-                        template: this.paths.templates.footerFlex,
-                        buttons: [{
+                    buttons: {
+                        left: [{
+                            html: "&nbsp;"
+                        }],
+                        right: [{
                             html: "&nbsp;"
                         }]
                     }
-                };
+                },
+                footer: {
+                    template: this.paths.templates.footerFlex,
+                    buttons: [{
+                        html: "&nbsp;"
+                    }]
+                }
+            };
 
                 //signup
                 this.pages.signup = {
