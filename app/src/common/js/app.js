@@ -83,9 +83,9 @@ config(['$routeProvider', '$locationProvider', 'appConfigProvider', '$compilePro
 	@toc 2.
 	*/
 
-        // $routeProvider.when(appPathRoute + 'home', {
-        //     redirectTo: appPathRoute + 'home/home.html'
-        // });
+    $routeProvider.when(appPathRoute + 'home', {
+        redirectTo: appPathRoute + 'home/home.html'
+    });
         $routeProvider.when(appPathRoute + 'dialpad', {
             redirectTo: appPathRoute + 'dialpad/dialpad.html',
             resolve: {
@@ -104,7 +104,7 @@ config(['$routeProvider', '$locationProvider', 'appConfigProvider', '$compilePro
             }
         });
         $routeProvider.when(appPathRoute + 'signup', {
-            templateUrl: pagesPath + 'signup/signup.html',
+            redirectTo: appPathRoute + 'signup/signup.html',
             resolve: {
                 auth: function(appAuth) {
                     return appAuth.checkSess({});
