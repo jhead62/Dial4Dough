@@ -82,17 +82,21 @@ config(['$routeProvider', '$locationProvider', 'appConfigProvider', '$compilePro
 	Generic / common routes
 	@toc 2.
 	*/
-        $routeProvider.when(appPathRoute + 'pricing', {
-            redirectTo: appPathRoute + 'pricing/pricing.html'
-        });
-        $routeProvider.when(appPathRoute + 'home', {
-            redirectTo: appPathRoute + 'home/home.html'
-        });
 
-
+        // $routeProvider.when(appPathRoute + 'home', {
+        //     redirectTo: appPathRoute + 'home/home.html'
+        // });
+        $routeProvider.when(appPathRoute + 'dialpad', {
+            redirectTo: appPathRoute + 'dialpad/dialpad.html',
+            resolve: {
+                auth: function(appAuth) {
+                    return appAuth.checkSess({});
+                }
+            }
+        });
 
         $routeProvider.when(appPathRoute + 'login', {
-            templateUrl: pagesPath + 'login/login.html',
+            redirectTo: appPathRoute + 'login/login.html',
             resolve: {
                 auth: function(appAuth) {
                     return appAuth.checkSess({});
@@ -122,6 +126,9 @@ config(['$routeProvider', '$locationProvider', 'appConfigProvider', '$compilePro
                     appAuth.checkSess();
                 }
             }
+        });
+        $routeProvider.when(appPathRoute + 'pricing', {
+            templateUrl: pagesPath + 'pricing/pricing.html'
         });
 
         // appAuth.checkSess({
@@ -224,6 +231,14 @@ config(['$routeProvider', '$locationProvider', 'appConfigProvider', '$compilePro
                 }
             }
         });
+        $routeProvider.when(appPathRoute + 'dialpad', {
+            templateUrl: pagesPath + '/dialpad/dialpad.html',
+            resolve: {
+                auth: function(appAuth) {
+                    return appAuth.checkSess({});
+                }
+            }
+        });
         //end: yeoman generated routes here - DO NOT DELETE THIS COMMENT AS IT IS USED BY YEOMAN TO GENERATE A NEW ROUTE!
 
 
@@ -232,7 +247,7 @@ config(['$routeProvider', '$locationProvider', 'appConfigProvider', '$compilePro
 	@toc 4.
 	*/
         $routeProvider.otherwise({
-            redirectTo: appPathRoute + 'home'
+            redirectTo: appPathRoute + ''
         });
 
     }

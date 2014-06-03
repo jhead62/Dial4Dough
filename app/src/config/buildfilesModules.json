@@ -412,9 +412,11 @@
 								],
 								"html": [
 									"home.html"
-								],"less":[
+								],
+								"less": [
 									"home.less"
-									],"testUnit": [
+								],
+								"testUnit": [
 									"HomeCtrl.spec.js"
 								]
 							}
@@ -537,22 +539,23 @@
 								}
 							]
 						},
-        {
-            "name": "dev-test",
-            "dirs": [{
-                    "name": "test",
-                    "files": {
-                        "js": [
-                            "TestCtrl.js"
-                        ],
-                        "html": [
-                            "test.html"
-                        ],
-                        "testUnit": [
-                            "TestCtrl.spec.js"
-                        ]
-                    }
-                },
+						{
+							"name": "dev-test",
+							"dirs": [
+								{
+									"name": "test",
+									"files": {
+										"js": [
+											"TestCtrl.js"
+										],
+										"html": [
+											"test.html"
+										],
+										"testUnit": [
+											"TestCtrl.spec.js"
+										]
+									}
+								},
 								{
 									"name": "socketio",
 									"files": {
@@ -586,6 +589,23 @@
 								],
 								"less": [
 									"pricing.less"
+								]
+							}
+						},
+						{
+							"name": "dialpad",
+							"files": {
+								"html": [
+									"dialpad.html"
+								],
+								"js": [
+									"DialpadCtrl.js"
+								],
+								"testUnit": [
+									"DialpadCtrl.spec.js"
+								],
+								"less": [
+									"dialpad.less"
 								]
 							}
 						}

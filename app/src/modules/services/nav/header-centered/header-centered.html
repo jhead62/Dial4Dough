@@ -1,19 +1,73 @@
 <div class="pure-menu pure-menu-open pure-menu-horizontal {{nav.classes.cont}}">
-    <a href="#" class="pure-menu-heading"><img src="{{appPathImg}}/d4d_smLogo.png" alt=""></p>
+    <a href="{{appPath}}/home/home.html" class="pure-menu-heading"><img src="{{appPathImg}}/d4d_smLogo.png" alt=""></p>
 		</a>
     <ul ng-repeat='button in nav.buttons.left' class="{{button.classes.cont}}">
-        <li><div>
+        <li>
 				
 				<div ng-if='!button.html' ng-hide='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-click = 'button.click()'>
 					</div>
 				<a ng-if='button.html' ng-show='button.href' class='{{button.classes.button}}' ng-href = '{{button.href}}' ng-bind-html='button.html'></a>
 				
-			</div>
+			
 		</li>
 		<!-- navbar Right -->
-		
+		<!-- Login Button -->
+		<!-- Logout Button -->
+		<!-- Signup -->
+
 		
     </ul>
+
+    <ul ng-repeat='button in nav.buttons.right' class="{{button.classes.cont}}">
+    	<li>
+    		<div ng-if='!button.html' ng-hide='button.href' class="nav-header-button nav-header-icon-button {{button.classes.button}}" ng-click='button.click()'>
+    		<a ng-if='button.html' ng-show='button.href' class="{{button.classes.button}}" ng-href='{{button.href}}' ng-bind-html='button.html'></a>
+    	</li>
+
+    </ul>
+
+    </div>
+<!-- 
+<div class="row clearfix">
+		<div class="col-md-12 column">
+			<ul class="nav nav-pills">
+				<li class="active">
+					<a href="#">Home</a>
+				</li>
+				<li>
+					<a href="#">Profile</a>
+				</li>
+				<li class="disabled">
+					<a href="#">Messages</a>
+				</li>
+				<li class="dropdown pull-right">
+					 <a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown<strong class="caret"></strong></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="#">Action</a>
+						</li>
+						<li>
+							<a href="#">Another action</a>
+						</li>
+						<li>
+							<a href="#">Something else here</a>
+						</li>
+						<li class="divider">
+						</li>
+						<li>
+							<a href="#">Separated link</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div> -->
+
+
+
+
+
+
 <!-- <div class='flex1 right nav-header-right-cont'>
 		<div class='flexbox row'>
 			<div ng-repeat='button in nav.buttons.right' class='nav-header-right flex1 {{button.classes.cont}}'>

@@ -132,11 +132,6 @@ factory('appNavConfig', ['appConfig', 'jrgArray',
                         self.historyBack({});
                     }
                 };
-                this.components.loginButton = {
-                    click: function() {
-                        self.historyBack({});
-                    }
-                };
 
                 this.components.headerCentered = {
                     template: this.paths.templates.headerCentered,
@@ -149,23 +144,23 @@ factory('appNavConfig', ['appConfig', 'jrgArray',
                             this.components.backButton, {
                                 html: "home",
                                 href: this.paths.appPathLink + ''
+                            }, { //icon: 'fa fa-sign-in',
+                                html: 'Register',
+                                href: this.paths.appPathLink + 'signup'
+
                             },
                             this.components.pricingButton, {
-                                html: "Pricing",
+                                html: "pricing",
                                 href: this.paths.appPathLink + 'pricing'
                             },
-                            this.components.loginButton, {
-                                //icon: 'fa fa-sign-in',
-                                html: 'Login',
-                                href: this.paths.appPathLink + 'login'
-                            }
                         ],
 
+
                         right: [{
-                                // icon: 'fa fa-sign-in',
-                                // html: 'Signup',
-                                // //iconHtml: 'Register',
-                                // href: this.paths.appPathLink + 'signup'
+                                icon: 'fa fa-sign-in',
+                                html: 'Signup',
+                                //iconHtml: 'Register',
+                                href: this.paths.appPathLink + 'signup'
                             }
                             //now toggling this in HeaderCtrl based on logged in status
                             // {
@@ -219,28 +214,28 @@ factory('appNavConfig', ['appConfig', 'jrgArray',
                 //site-specific
                 //CUSTOM nav definitions
                 //login
-            this.pages.login = {
-                header: {
-                    template: this.paths.templates.headerCentered,
-                    title: {
-                        html: '&nbsp;'
+                this.pages.login = {
+                    header: {
+                        template: this.paths.templates.headerCentered,
+                        title: {
+                            html: '&nbsp;'
+                        },
+                        buttons: {
+                            left: [{
+                                html: "&nbsp;"
+                            }],
+                            right: [{
+                                html: "&nbsp;"
+                            }]
+                        }
                     },
-                    buttons: {
-                        left: [{
-                            html: "&nbsp;"
-                        }],
-                        right: [{
+                    footer: {
+                        template: this.paths.templates.footerFlex,
+                        buttons: [{
                             html: "&nbsp;"
                         }]
                     }
-                },
-                footer: {
-                    template: this.paths.templates.footerFlex,
-                    buttons: [{
-                        html: "&nbsp;"
-                    }]
-                }
-            };
+                };
 
                 //signup
                 this.pages.signup = {
