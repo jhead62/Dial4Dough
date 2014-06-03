@@ -83,16 +83,8 @@ config(['$routeProvider', '$locationProvider', 'appConfigProvider', '$compilePro
 	@toc 2.
 	*/
 
-    $routeProvider.when(appPathRoute + 'home', {
-        redirectTo: appPathRoute + 'home/home.html'
-    });
-        $routeProvider.when(appPathRoute + 'dialpad', {
-            redirectTo: appPathRoute + 'dialpad/dialpad.html',
-            resolve: {
-                auth: function(appAuth) {
-                    return appAuth.checkSess({});
-                }
-            }
+        $routeProvider.when(appPathRoute + 'home', {
+            redirectTo: appPathRoute + 'home/home.html'
         });
 
         $routeProvider.when(appPathRoute + 'login', {
@@ -104,7 +96,7 @@ config(['$routeProvider', '$locationProvider', 'appConfigProvider', '$compilePro
             }
         });
         $routeProvider.when(appPathRoute + 'signup', {
-            redirectTo: appPathRoute + 'signup/signup.html',
+            redirectTo: pagesPath + 'signup/signup.html',
             resolve: {
                 auth: function(appAuth) {
                     return appAuth.checkSess({});
@@ -127,14 +119,12 @@ config(['$routeProvider', '$locationProvider', 'appConfigProvider', '$compilePro
                 }
             }
         });
-        $routeProvider.when(appPathRoute + 'pricing', {
-            templateUrl: pagesPath + 'pricing/pricing.html'
-        });
+
 
         // appAuth.checkSess({
         //     auth: {
-        //         loggedIn: {},       //require user to be logged in to view this page
-        //         //require user to be a member (user.status =='member') to view this page and if NOT, redirect user to 'auth-member' page
+        //         loggedIn: {user.role.platinum},       //require user to be logged in to view this page
+        //         //require user to be a member (user.status =='p.member') to view this page and if NOT, redirect user to 'auth-member' page
         //         member: {
         //             redirect: 'auth-member'
         //         }
