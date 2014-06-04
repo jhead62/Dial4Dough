@@ -132,6 +132,13 @@ factory('appNavConfig', ['appConfig', 'jrgArray',
                         self.historyBack({});
                     }
                 };
+                this.components.registerButton = {
+                    //icon: 'fa fa-icon-left',
+                    //html: "<span class='fa glyphicon-tower'></span>",
+                    click: function() {
+                        self.historyBack({});
+                    }
+                };
 
                 this.components.headerCentered = {
                     template: this.paths.templates.headerCentered,
@@ -142,25 +149,27 @@ factory('appNavConfig', ['appConfig', 'jrgArray',
                     buttons: {
                         left: [
                             this.components.backButton, {
-                                html: "home",
+                                html: "Home",
                                 href: this.paths.appPathLink + ''
-                            }, { //icon: 'fa fa-sign-in',
-                                html: 'Register',
-                                href: this.paths.appPathLink + 'signup'
-
                             },
                             this.components.pricingButton, {
                                 html: "pricing",
                                 href: this.paths.appPathLink + 'pricing'
                             },
+                            this.components.registerButton, {
+                                //icon: 'fa fa-sign-in',
+                                html: 'register',
+                                href: this.paths.appPathLink + 'register'
+
+                            }
                         ],
 
 
                         right: [{
-                                icon: 'fa fa-sign-in',
-                                html: 'Signup',
+                                //icon: 'fa fa-sign-in',
+                                //html: 'Signup',
                                 //iconHtml: 'Register',
-                                href: this.paths.appPathLink + 'signup'
+                                //href: this.paths.appPathLink + 'signup'
                             }
                             //now toggling this in HeaderCtrl based on logged in status
                             // {

@@ -442,6 +442,120 @@ angular.module("myApp").run(["$templateCache", function($templateCache) {
     "\n" +
     "\t<div app-login forgot-pass='forgotPass' login='login'></div>\r" +
     "\n" +
+    "\r" +
+    "\n" +
+    "<div data-ng-controller=\"RegisterCtrl\">\r" +
+    "\n" +
+    "    <div ng-repeat=\"error in registerError\">\r" +
+    "\n" +
+    "        <div class=\"alert alert-danger animated fadeIn\">{{error.msg}}</div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "    <div class=\"alert alert-danger animated fadeIn\" ng-show=\"usernameError\">{{usernameError}}</div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <h1>Register</h1>\r" +
+    "\n" +
+    "    <form ng-submit=\"register()\" class=\"signup form-horizontal\">\r" +
+    "\n" +
+    "        <div class=\"form-group\">\r" +
+    "\n" +
+    "            <label for=\"name\" class=\"col-md-4 control-label\">Full Name</label>\r" +
+    "\n" +
+    "            <div class=\"col-md-8\">\r" +
+    "\n" +
+    "                <input id=\"name\" type=\"text\" name=\"name\" placeholder=\"Full name\" class=\"form-control\" ng-model=\"user.name\"/>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div class=\"form-group\">\r" +
+    "\n" +
+    "            <label for=\"email\" class=\"col-md-4 control-label\">Email</label>\r" +
+    "\n" +
+    "            <div class=\"col-md-8\">\r" +
+    "\n" +
+    "                <input id=\"email\" type=\"email\" name=\"email\" placeholder=\"Email\" class=\"form-control\" ng-model=\"user.email\"/>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div class=\"form-group\">\r" +
+    "\n" +
+    "            <label for=\"username\" class=\"col-md-4 control-label\">Username</label>\r" +
+    "\n" +
+    "            <div class=\"col-md-8\">\r" +
+    "\n" +
+    "                <input id=\"username\" type=\"text\" name=\"username\" placeholder=\"Username\" class=\"form-control\" ng-model=\"user.username\"/>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div class=\"form-group\">\r" +
+    "\n" +
+    "            <label for=\"password\" class=\"col-md-4 control-label\">Password</label>\r" +
+    "\n" +
+    "            <div class=\"col-md-8\">\r" +
+    "\n" +
+    "                <input id=\"password\" type=\"password\" name=\"password\" placeholder=\"Password\" class=\"form-control\" ng-model=\"user.password\"/>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div class=\"form-group\">\r" +
+    "\n" +
+    "            <label for=\"confirmPassword\" class=\"col-md-4 control-label\">Repeat Password</label>\r" +
+    "\n" +
+    "            <div class=\"col-md-8\">\r" +
+    "\n" +
+    "                <input id=\"confirmPassword\" type=\"password\" name=\"confirmPassword\" placeholder=\"Password\" class=\"form-control\" ng-model=\"user.confirmPassword\"/>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div class=\"form-group\">\r" +
+    "\n" +
+    "            <div class=\"col-md-offset-4 col-md-8\">\r" +
+    "\n" +
+    "                <button type=\"submit\" class=\"btn btn-primary\">Sign up</button>&nbsp;\r" +
+    "\n" +
+    "                or&nbsp;<a ui-sref='auth.login' class=\"show-login\">login</a>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </form>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\t\r" +
+    "\n" +
     "</div>"
   );
 

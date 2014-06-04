@@ -170,6 +170,17 @@ config(['$routeProvider', '$locationProvider', 'appConfigProvider', '$compilePro
             }
         });
 
+        //Register-- Page
+        $routeProvider.when(appPathRoute + 'register', {
+            templateUrl: pagesPath + 'signup/signup.html',
+            resolve: {
+                auth: function(appAuth) {
+                    return appAuth.checkSess({});
+                }
+            }
+        });
+
+
         //dev-test
         // $routeProvider.when(appPathRoute+'test', {templateUrl: pagesPath+'test/test.html'});
         $routeProvider.when(appPathRoute + 'dev-test/test', {
