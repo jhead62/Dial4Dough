@@ -45,6 +45,9 @@ Looking for a creative Programers.
 
 
 First Step Integrations:
+-- The PAP API will be used for the central point for the data.
+	The mongod Database is used for the adPad to Dial4dough --for instant updates  --
+	-- Instant help integrations
 - PAP: php -> nodejs - The api will interact with login/regististration
 	- payouts --
 	- Add user to appropiate campains e.g. user.role. --Platinum/bronze/gold
@@ -53,4 +56,5 @@ First Step Integrations:
 
 - Twilio Connection -- 
 	- Ater the ad is viewed -- send completion data to PAP.
+
 	
