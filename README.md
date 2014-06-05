@@ -3,6 +3,13 @@
 Looking for a creative Programers.
 - What is a creative programer? 
 	A person who is passionate about their craft, they would code for free if their wasn't need for money.
+	-- Skilled with PHP, Javascript, php --> Nodejs
+	-- Mobile Application Knowledge
+	-- famo.us -- Knowledge **Great**
+	-- Twilio -- Javascript Knowledge
+	-- GeoLocation integration
+	-- Google Charts
+	-- Paypal Api.
 
 
 
@@ -32,6 +39,12 @@ Looking for a creative Programers.
 	user.role.gold  = user will have access similar to platinum member (maximum.daily amount -- Limited per Month)
 	user.role.bronze = user will have limited access. (daily.limits[depends on the amount left from primary list])
 
+
+	##using Nodejs for expansion to browser apps/Desktop applications.
+
+	#There are 3 Databases. -- Mongodb - For transfering from AdPad
+		-- firebase? -- Instant Update list -- For platinum and Gold members
+		-- Mongodb -- The list will have some user data, and details of the Ads.
 
 	##Needs Completion 
 	-- Login-- The login page is not functioning properly.
