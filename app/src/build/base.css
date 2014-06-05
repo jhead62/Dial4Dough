@@ -7764,11 +7764,15 @@ overflow:hidden;
   font-size: 9pt;
   line-height: 11pt;
 }
+.nav-header-button.icon-only .nav-header-icon-button-icon {
+  font-size: 21pt;
+}
 .nav-header-button-cont {
   position: absolute;
 }
 .nav-header-right {
   float: right;
+  margin: 23px auto;
 }
 .nav-header-left,
 .nav-header-right {

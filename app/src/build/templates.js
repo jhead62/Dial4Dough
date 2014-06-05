@@ -1,310 +1,160 @@
 angular.module("myApp").run(["$templateCache", function($templateCache) {
 
   $templateCache.put("/src/modules/services/nav/header-centered/header-centered.html",
-    "<div class=\"pure-menu pure-menu-open pure-menu-horizontal  {{nav.classes.cont}}\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <a href=\"{{staticPath}}\" class=\"pure-menu-heading\"><img src=\"{{appPathImg}}/d4d_smLogo.png\" alt=\"\"></p>\r" +
-    "\n" +
-    "\t\t</a>\r" +
-    "\n" +
-    "    <ul  ng-repeat='button in nav.buttons.left' class=\"{{button.classes.cont}}\">\r" +
-    "\n" +
-    "        <li>\r" +
-    "\n" +
-    "\t\t\t\t\r" +
-    "\n" +
-    "\t\t\t\t<div ng-if='!button.html' ng-hide='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-click = 'button.click()'>\r" +
-    "\n" +
-    "\t\t\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t\t<a ng-if='button.html' ng-show='button.href' class='{{button.classes.button}}' ng-href = '{{button.href}}' ng-bind-html='button.html'></a>\r" +
-    "\n" +
-    "\t\t\t\t\r" +
-    "\n" +
-    "\t\t\t\r" +
-    "\n" +
-    "\t\t</li></ul>\r" +
-    "\n" +
-    "\t\t<!-- navbar Right -->\r" +
-    "\n" +
-    "\t\t<!-- Login Button -->\r" +
-    "\n" +
-    "\t\t<!-- Logout Button -->\r" +
-    "\n" +
-    "\t\t<!-- Signup -->\r" +
-    "\n" +
-    "\t\r" +
-    "\n" +
-    "\t\t\t<ul ng-repeat='button in nav.buttons.right' class='nav-header-right pure-menu-horizontal  {{button.classes.cont}}'>\r" +
-    "\n" +
-    "\t\t\t\t<!-- <a ng-if='!button.html' ng-show='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-href = '{{button.href}}'>\r" +
-    "\n" +
-    "\t\t\t\t\t<i class='nav-header-icon-button-icon {{button.icon}}'></i>\r" +
-    "\n" +
-    "\t\t\t\t\t<div class='nav-header-icon-button-text' ng-bind-html='button.iconHtml'></div>\r" +
-    "\n" +
-    "\t\t\t\t</a> -->\r" +
-    "\n" +
-    "\t\t\t\t<!-- <li ng-if='!button.html' ng-hide='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-click = 'button.click()'>\r" +
-    "\n" +
-    "\t\t\t\t\t<i class='nav-header-icon-button-icon {{button.icon}}'></i>\r" +
-    "\n" +
-    "\t\t\t\t\t<div class='nav-header-icon-button-text' ng-bind-html='button.iconHtml'></div>\r" +
-    "\n" +
-    "\t\t\t\t</li> -->\r" +
-    "\n" +
-    "\t\t\t\t<a ng-if='button.html' ng-show='button.href' class='nav-header-button {{button.classes.button}}' ng-href = '{{button.href}}' ng-bind-html='button.html'></a>\r" +
-    "\n" +
-    "\t\t\t\t<div ng-if='button.html' ng-hide='button.href' class='nav-header-button {{button.classes.button}}' ng-click = 'button.click()' ng-bind-html='button.html'></div>\r" +
-    "\n" +
-    "\t\t\t</ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\t\t\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "</div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "<!-- \r" +
-    "\n" +
-    "<div class=\"row clearfix\">\r" +
-    "\n" +
-    "\t\t<div class=\"col-md-12 column\">\r" +
-    "\n" +
-    "\t\t\t<ul class=\"nav nav-pills\">\r" +
-    "\n" +
-    "\t\t\t\t<li class=\"active\">\r" +
-    "\n" +
-    "\t\t\t\t\t<a href=\"#\">Home</a>\r" +
-    "\n" +
-    "\t\t\t\t</li>\r" +
-    "\n" +
-    "\t\t\t\t<li>\r" +
-    "\n" +
-    "\t\t\t\t\t<a href=\"#\">Profile</a>\r" +
-    "\n" +
-    "\t\t\t\t</li>\r" +
-    "\n" +
-    "\t\t\t\t<li class=\"disabled\">\r" +
-    "\n" +
-    "\t\t\t\t\t<a href=\"#\">Messages</a>\r" +
-    "\n" +
-    "\t\t\t\t</li>\r" +
-    "\n" +
-    "\t\t\t\t<li class=\"dropdown pull-right\">\r" +
-    "\n" +
-    "\t\t\t\t\t <a href=\"#\" data-toggle=\"dropdown\" class=\"dropdown-toggle\">Dropdown<strong class=\"caret\"></strong></a>\r" +
-    "\n" +
-    "\t\t\t\t\t<ul class=\"dropdown-menu\">\r" +
-    "\n" +
-    "\t\t\t\t\t\t<li>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t<a href=\"#\">Action</a>\r" +
-    "\n" +
-    "\t\t\t\t\t\t</li>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<li>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t<a href=\"#\">Another action</a>\r" +
-    "\n" +
-    "\t\t\t\t\t\t</li>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<li>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t<a href=\"#\">Something else here</a>\r" +
-    "\n" +
-    "\t\t\t\t\t\t</li>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<li class=\"divider\">\r" +
-    "\n" +
-    "\t\t\t\t\t\t</li>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<li>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t<a href=\"#\">Separated link</a>\r" +
-    "\n" +
-    "\t\t\t\t\t\t</li>\r" +
-    "\n" +
-    "\t\t\t\t\t</ul>\r" +
-    "\n" +
-    "\t\t\t\t</li>\r" +
-    "\n" +
-    "\t\t\t</ul>\r" +
-    "\n" +
-    "\t\t</div>\r" +
-    "\n" +
-    "\t</div> -->\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "<!-- <div class='flex1 right nav-header-right-cont'>\r" +
-    "\n" +
-    "\t\t<div class='flexbox row'>\r" +
-    "\n" +
-    "\t\t\t<div ng-repeat='button in nav.buttons.right' class='nav-header-right flex1 {{button.classes.cont}}'>\r" +
-    "\n" +
-    "\t\t\t\t<a ng-if='!button.html' ng-show='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-href = '{{button.href}}'>\r" +
-    "\n" +
-    "\t\t\t\t\t<i class='nav-header-icon-button-icon {{button.icon}}'></i>\r" +
-    "\n" +
-    "\t\t\t\t\t<div class='nav-header-icon-button-text' ng-bind-html='button.iconHtml'></div>\r" +
-    "\n" +
-    "\t\t\t\t</a>\r" +
-    "\n" +
-    "\t\t\t\t<div ng-if='!button.html' ng-hide='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-click = 'button.click()'>\r" +
-    "\n" +
-    "\t\t\t\t\t<i class='nav-header-icon-button-icon {{button.icon}}'></i>\r" +
-    "\n" +
-    "\t\t\t\t\t<div class='nav-header-icon-button-text' ng-bind-html='button.iconHtml'></div>\r" +
-    "\n" +
-    "\t\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t\t<a ng-if='button.html' ng-show='button.href' class='nav-header-button {{button.classes.button}}' ng-href = '{{button.href}}' ng-bind-html='button.html'></a>\r" +
-    "\n" +
-    "\t\t\t\t<div ng-if='button.html' ng-hide='button.href' class='nav-header-button {{button.classes.button}}' ng-click = 'button.click()' ng-bind-html='button.html'></div>\r" +
-    "\n" +
-    "\t\t\t</div>\r" +
-    "\n" +
-    "\t\t</div>\r" +
-    "\n" +
-    "\t</div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "</div> -->\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "<!-- <div class='nav-header flexbox row {{nav.classes.cont}}'>\r" +
-    "\n" +
-    "\t<div class='flex1 left nav-header-left-cont'>\r" +
-    "\n" +
-    "\t\t<div class='flexbox row'>\r" +
-    "\n" +
-    "\t\t\t<div ng-repeat='button in nav.buttons.left' class='nav-header-left flex1 {{button.classes.cont}}'>\r" +
-    "\n" +
-    "\t\t\t\t<a ng-if='!button.html' ng-show='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-href = '{{button.href}}'>\r" +
-    "\n" +
-    "\t\t\t\t\t<i class='nav-header-icon-button-icon {{button.icon}}'></i>\r" +
-    "\n" +
-    "\t\t\t\t\t<div class='nav-header-icon-button-text' ng-bind-html='button.iconHtml'></div>\r" +
-    "\n" +
-    "\t\t\t\t</a>\r" +
-    "\n" +
-    "\t\t\t\t<div ng-if='!button.html' ng-hide='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-click = 'button.click()'>\r" +
-    "\n" +
-    "\t\t\t\t\t<i class='nav-header-icon-button-icon {{button.icon}}'></i>\r" +
-    "\n" +
-    "\t\t\t\t\t<div class='nav-header-icon-button-text' ng-bind-html='button.iconHtml'></div>\r" +
-    "\n" +
-    "\t\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t\t<a ng-if='button.html' ng-show='button.href' class='nav-header-button {{button.classes.button}}' ng-href = '{{button.href}}' ng-bind-html='button.html'></a>\r" +
-    "\n" +
-    "\t\t\t\t<div ng-if='button.html' ng-hide='button.href' class='nav-header-button {{button.classes.button}}' ng-click = 'button.click()' ng-bind-html='button.html'></div>\r" +
-    "\n" +
-    "\t\t\t</div>\r" +
-    "\n" +
-    "\t\t</div>\r" +
-    "\n" +
-    "\t</div>\r" +
-    "\n" +
-    "\t<h3 class='flex3 center nav-header-title-cont {{nav.title.classes.cont}}'>\r" +
-    "\n" +
-    "\t\t<a ng-show='nav.title.href' class='nav-header-title' ng-href = '{{nav.title.href}}' ng-bind-html='nav.title.html'></a>\r" +
-    "\n" +
-    "\t\t<div ng-hide='nav.title.href' class='nav-header-title' ng-click = 'nav.title.click()' ng-bind-html='nav.title.html'></div>\r" +
-    "\n" +
-    "\t</h3>\r" +
-    "\n" +
-    "\t<div class='flex1 right nav-header-right-cont'>\r" +
-    "\n" +
-    "\t\t<div class='flexbox row'>\r" +
-    "\n" +
-    "\t\t\t<div ng-repeat='button in nav.buttons.right' class='nav-header-right flex1 {{button.classes.cont}}'>\r" +
-    "\n" +
-    "\t\t\t\t<a ng-if='!button.html' ng-show='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-href = '{{button.href}}'>\r" +
-    "\n" +
-    "\t\t\t\t\t<i class='nav-header-icon-button-icon {{button.icon}}'></i>\r" +
-    "\n" +
-    "\t\t\t\t\t<div class='nav-header-icon-button-text' ng-bind-html='button.iconHtml'></div>\r" +
-    "\n" +
-    "\t\t\t\t</a>\r" +
-    "\n" +
-    "\t\t\t\t<div ng-if='!button.html' ng-hide='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-click = 'button.click()'>\r" +
-    "\n" +
-    "\t\t\t\t\t<i class='nav-header-icon-button-icon {{button.icon}}'></i>\r" +
-    "\n" +
-    "\t\t\t\t\t<div class='nav-header-icon-button-text' ng-bind-html='button.iconHtml'></div>\r" +
-    "\n" +
-    "\t\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t\t<a ng-if='button.html' ng-show='button.href' class='nav-header-button {{button.classes.button}}' ng-href = '{{button.href}}' ng-bind-html='button.html'></a>\r" +
-    "\n" +
-    "\t\t\t\t<div ng-if='button.html' ng-hide='button.href' class='nav-header-button {{button.classes.button}}' ng-click = 'button.click()' ng-bind-html='button.html'></div>\r" +
-    "\n" +
-    "\t\t\t</div>\r" +
-    "\n" +
-    "\t\t</div>\r" +
-    "\n" +
-    "\t</div>\r" +
-    "\n" +
+    "<div class=\"pure-menu pure-menu-open pure-menu-horizontal  {{nav.classes.cont}}\">\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "    <a href=\"{{staticPath}}\" class=\"pure-menu-heading\"><img src=\"{{appPathImg}}/d4d_smLogo.png\" alt=\"\"></p>\n" +
+    "\t\t</a>\n" +
+    "    <ul  ng-repeat='button in nav.buttons.left' class=\"{{button.classes.cont}}\">\n" +
+    "        <li>\n" +
+    "\t\t\t\t\n" +
+    "\t\t\t\t<div ng-if='!button.html' ng-hide='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-click = 'button.click()'>\n" +
+    "\t\t\t\t\t</div>\n" +
+    "\t\t\t\t<a ng-if='button.html' ng-show='button.href' class='{{button.classes.button}}' ng-href = '{{button.href}}' ng-bind-html='button.html'></a>\n" +
+    "\t\t\t\t\n" +
+    "\t\t\t\n" +
+    "\t\t</li></ul>\n" +
+    "\t\t<!-- navbar Right -->\n" +
+    "\t\t<!-- Login Button -->\n" +
+    "\t\t<!-- Logout Button -->\n" +
+    "\t\t<!-- Signup -->\n" +
+    "\t\n" +
+    "\t\t\t<ul ng-repeat='button in nav.buttons.right' class='nav-header-right right pure-menu-horizontal  {{button.classes.cont}}'>\n" +
+    "\t\t\t\t<a ng-if='!button.html' ng-show='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-href = '{{button.href}}'>\n" +
+    "\t\t\t\t\t<i class='nav-header-icon-button-icon {{button.icon}}'></i>\n" +
+    "\t\t\t\t\t<div class='nav-header-icon-button-text' ng-bind-html='button.iconHtml'></div>\n" +
+    "\t\t\t\t</a>\n" +
+    "\t\t\t\t<li ng-if='!button.html' ng-hide='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-click = 'button.click()'>\n" +
+    "\t\t\t\t\t<i class='nav-header-icon-button-icon {{button.icon}}'></i>\n" +
+    "\t\t\t\t\t<div class='nav-header-icon-button-text' ng-bind-html='button.iconHtml'></div>\n" +
+    "\t\t\t\t</li>\n" +
+    "\t\t\t\t<a ng-if='button.html' ng-show='button.href' class='nav-header-right {{button.classes.button}}' ng-href = '{{button.href}}' ng-bind-html='button.html'></a>\n" +
+    "\t\t\t\t<!-- <div ng-if='button.html' ng-hide='button.href' class='nav-header-button {{button.classes.button}}' ng-click = 'button.click()' ng-bind-html='button.html'></div> -->\n" +
+    "\t\t\t</ul>\n" +
+    "\n" +
+    "\t\t\n" +
+    "\n" +
+    "\n" +
+    "</div>\n" +
+    "\n" +
+    "<!-- \n" +
+    "<div class=\"row clearfix\">\n" +
+    "\t\t<div class=\"col-md-12 column\">\n" +
+    "\t\t\t<ul class=\"nav nav-pills\">\n" +
+    "\t\t\t\t<li class=\"active\">\n" +
+    "\t\t\t\t\t<a href=\"#\">Home</a>\n" +
+    "\t\t\t\t</li>\n" +
+    "\t\t\t\t<li>\n" +
+    "\t\t\t\t\t<a href=\"#\">Profile</a>\n" +
+    "\t\t\t\t</li>\n" +
+    "\t\t\t\t<li class=\"disabled\">\n" +
+    "\t\t\t\t\t<a href=\"#\">Messages</a>\n" +
+    "\t\t\t\t</li>\n" +
+    "\t\t\t\t<li class=\"dropdown pull-right\">\n" +
+    "\t\t\t\t\t <a href=\"#\" data-toggle=\"dropdown\" class=\"dropdown-toggle\">Dropdown<strong class=\"caret\"></strong></a>\n" +
+    "\t\t\t\t\t<ul class=\"dropdown-menu\">\n" +
+    "\t\t\t\t\t\t<li>\n" +
+    "\t\t\t\t\t\t\t<a href=\"#\">Action</a>\n" +
+    "\t\t\t\t\t\t</li>\n" +
+    "\t\t\t\t\t\t<li>\n" +
+    "\t\t\t\t\t\t\t<a href=\"#\">Another action</a>\n" +
+    "\t\t\t\t\t\t</li>\n" +
+    "\t\t\t\t\t\t<li>\n" +
+    "\t\t\t\t\t\t\t<a href=\"#\">Something else here</a>\n" +
+    "\t\t\t\t\t\t</li>\n" +
+    "\t\t\t\t\t\t<li class=\"divider\">\n" +
+    "\t\t\t\t\t\t</li>\n" +
+    "\t\t\t\t\t\t<li>\n" +
+    "\t\t\t\t\t\t\t<a href=\"#\">Separated link</a>\n" +
+    "\t\t\t\t\t\t</li>\n" +
+    "\t\t\t\t\t</ul>\n" +
+    "\t\t\t\t</li>\n" +
+    "\t\t\t</ul>\n" +
+    "\t\t</div>\n" +
+    "\t</div> -->\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "<!-- <div class='flex1 right nav-header-right-cont'>\n" +
+    "\t\t<div class='flexbox row'>\n" +
+    "\t\t\t<div ng-repeat='button in nav.buttons.right' class='nav-header-right flex1 {{button.classes.cont}}'>\n" +
+    "\t\t\t\t<a ng-if='!button.html' ng-show='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-href = '{{button.href}}'>\n" +
+    "\t\t\t\t\t<i class='nav-header-icon-button-icon {{button.icon}}'></i>\n" +
+    "\t\t\t\t\t<div class='nav-header-icon-button-text' ng-bind-html='button.iconHtml'></div>\n" +
+    "\t\t\t\t</a>\n" +
+    "\t\t\t\t<div ng-if='!button.html' ng-hide='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-click = 'button.click()'>\n" +
+    "\t\t\t\t\t<i class='nav-header-icon-button-icon {{button.icon}}'></i>\n" +
+    "\t\t\t\t\t<div class='nav-header-icon-button-text' ng-bind-html='button.iconHtml'></div>\n" +
+    "\t\t\t\t</div>\n" +
+    "\t\t\t\t<a ng-if='button.html' ng-show='button.href' class='nav-header-button {{button.classes.button}}' ng-href = '{{button.href}}' ng-bind-html='button.html'></a>\n" +
+    "\t\t\t\t<div ng-if='button.html' ng-hide='button.href' class='nav-header-button {{button.classes.button}}' ng-click = 'button.click()' ng-bind-html='button.html'></div>\n" +
+    "\t\t\t</div>\n" +
+    "\t\t</div>\n" +
+    "\t</div>\n" +
+    "\n" +
+    "</div> -->\n" +
+    "\n" +
+    "<!-- <div class='nav-header flexbox row {{nav.classes.cont}}'>\n" +
+    "\t<div class='flex1 left nav-header-left-cont'>\n" +
+    "\t\t<div class='flexbox row'>\n" +
+    "\t\t\t<div ng-repeat='button in nav.buttons.left' class='nav-header-left flex1 {{button.classes.cont}}'>\n" +
+    "\t\t\t\t<a ng-if='!button.html' ng-show='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-href = '{{button.href}}'>\n" +
+    "\t\t\t\t\t<i class='nav-header-icon-button-icon {{button.icon}}'></i>\n" +
+    "\t\t\t\t\t<div class='nav-header-icon-button-text' ng-bind-html='button.iconHtml'></div>\n" +
+    "\t\t\t\t</a>\n" +
+    "\t\t\t\t<div ng-if='!button.html' ng-hide='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-click = 'button.click()'>\n" +
+    "\t\t\t\t\t<i class='nav-header-icon-button-icon {{button.icon}}'></i>\n" +
+    "\t\t\t\t\t<div class='nav-header-icon-button-text' ng-bind-html='button.iconHtml'></div>\n" +
+    "\t\t\t\t</div>\n" +
+    "\t\t\t\t<a ng-if='button.html' ng-show='button.href' class='nav-header-button {{button.classes.button}}' ng-href = '{{button.href}}' ng-bind-html='button.html'></a>\n" +
+    "\t\t\t\t<div ng-if='button.html' ng-hide='button.href' class='nav-header-button {{button.classes.button}}' ng-click = 'button.click()' ng-bind-html='button.html'></div>\n" +
+    "\t\t\t</div>\n" +
+    "\t\t</div>\n" +
+    "\t</div>\n" +
+    "\t<h3 class='flex3 center nav-header-title-cont {{nav.title.classes.cont}}'>\n" +
+    "\t\t<a ng-show='nav.title.href' class='nav-header-title' ng-href = '{{nav.title.href}}' ng-bind-html='nav.title.html'></a>\n" +
+    "\t\t<div ng-hide='nav.title.href' class='nav-header-title' ng-click = 'nav.title.click()' ng-bind-html='nav.title.html'></div>\n" +
+    "\t</h3>\n" +
+    "\t<div class='flex1 right nav-header-right-cont'>\n" +
+    "\t\t<div class='flexbox row'>\n" +
+    "\t\t\t<div ng-repeat='button in nav.buttons.right' class='nav-header-right flex1 {{button.classes.cont}}'>\n" +
+    "\t\t\t\t<a ng-if='!button.html' ng-show='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-href = '{{button.href}}'>\n" +
+    "\t\t\t\t\t<i class='nav-header-icon-button-icon {{button.icon}}'></i>\n" +
+    "\t\t\t\t\t<div class='nav-header-icon-button-text' ng-bind-html='button.iconHtml'></div>\n" +
+    "\t\t\t\t</a>\n" +
+    "\t\t\t\t<div ng-if='!button.html' ng-hide='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-click = 'button.click()'>\n" +
+    "\t\t\t\t\t<i class='nav-header-icon-button-icon {{button.icon}}'></i>\n" +
+    "\t\t\t\t\t<div class='nav-header-icon-button-text' ng-bind-html='button.iconHtml'></div>\n" +
+    "\t\t\t\t</div>\n" +
+    "\t\t\t\t<a ng-if='button.html' ng-show='button.href' class='nav-header-button {{button.classes.button}}' ng-href = '{{button.href}}' ng-bind-html='button.html'></a>\n" +
+    "\t\t\t\t<div ng-if='button.html' ng-hide='button.href' class='nav-header-button {{button.classes.button}}' ng-click = 'button.click()' ng-bind-html='button.html'></div>\n" +
+    "\t\t\t</div>\n" +
+    "\t\t</div>\n" +
+    "\t</div>\n" +
     "</div> -->"
   );
 
   $templateCache.put("/src/modules/services/nav/footer-flex/footer-flex.html",
-    "\r" +
     "\n" +
-    "\r" +
     "\n" +
-    "<!-- <div class='nav-footer flexbox row {{nav.classes.cont}}'>\r" +
-    "\n" +
-    "\t<div ng-repeat='button in nav.buttons' class='flex1 nav-footer-button-cont {{button.classes.cont}}'>\r" +
-    "\n" +
-    "\t\t<a ng-if='!button.html' ng-show='button.href' class='nav-footer-button nav-footer-icon-button {{button.classes.button}}' ng-href = '{{button.href}}'>\r" +
-    "\n" +
-    "\t\t\t<i class='nav-footer-icon-button-icon {{button.icon}}'></i>\r" +
-    "\n" +
-    "\t\t\t<div class='nav-footer-icon-button-text' ng-bind-html='button.iconHtml'></div>\r" +
-    "\n" +
-    "\t\t</a>\r" +
-    "\n" +
-    "\t\t<div ng-if='!button.html' ng-hide='button.href' class='nav-footer-button nav-footer-icon-button {{button.classes.button}}' ng-click = 'button.click()'>\r" +
-    "\n" +
-    "\t\t\t<i class='nav-footer-icon-button-icon {{button.icon}}'></i>\r" +
-    "\n" +
-    "\t\t\t<div class='nav-footer-icon-button-text' ng-bind-html='button.iconHtml'></div>\r" +
-    "\n" +
-    "\t\t</div>\r" +
-    "\n" +
-    "\t\t<a ng-if='button.html' ng-show='button.href' class='nav-footer-button' ng-href = '{{button.href}}' ng-bind-html='button.html'></a>\r" +
-    "\n" +
-    "\t\t<div ng-if='button.html' ng-hide='button.href' class='nav-footer-button' ng-click = 'button.click()' ng-bind-html='button.html'></div>\r" +
-    "\n" +
-    "\t</div>\r" +
-    "\n" +
+    "<!-- <div class='nav-footer flexbox row {{nav.classes.cont}}'>\n" +
+    "\t<div ng-repeat='button in nav.buttons' class='flex1 nav-footer-button-cont {{button.classes.cont}}'>\n" +
+    "\t\t<a ng-if='!button.html' ng-show='button.href' class='nav-footer-button nav-footer-icon-button {{button.classes.button}}' ng-href = '{{button.href}}'>\n" +
+    "\t\t\t<i class='nav-footer-icon-button-icon {{button.icon}}'></i>\n" +
+    "\t\t\t<div class='nav-footer-icon-button-text' ng-bind-html='button.iconHtml'></div>\n" +
+    "\t\t</a>\n" +
+    "\t\t<div ng-if='!button.html' ng-hide='button.href' class='nav-footer-button nav-footer-icon-button {{button.classes.button}}' ng-click = 'button.click()'>\n" +
+    "\t\t\t<i class='nav-footer-icon-button-icon {{button.icon}}'></i>\n" +
+    "\t\t\t<div class='nav-footer-icon-button-text' ng-bind-html='button.iconHtml'></div>\n" +
+    "\t\t</div>\n" +
+    "\t\t<a ng-if='button.html' ng-show='button.href' class='nav-footer-button' ng-href = '{{button.href}}' ng-bind-html='button.html'></a>\n" +
+    "\t\t<div ng-if='button.html' ng-hide='button.href' class='nav-footer-button' ng-click = 'button.click()' ng-bind-html='button.html'></div>\n" +
+    "\t</div>\n" +
     "</div> -->"
   );
 
@@ -319,12 +169,9 @@ angular.module("myApp").run(["$templateCache", function($templateCache) {
   );
 
   $templateCache.put("/src/modules/pages/footer/footer.html",
-    "<div class='footer-fixed {{classes.cont}}' ng-controller='FooterCtrl'>\r" +
-    "\n" +
-    "\t<div class='footer' ng-include='nav.template'></div>\r" +
-    "\n" +
-    "\t<div class='footer-spacer'>&nbsp;</div>\r" +
-    "\n" +
+    "<div class='footer-fixed {{classes.cont}}' ng-controller='FooterCtrl'>\n" +
+    "\t<div class='footer' ng-include='nav.template'></div>\n" +
+    "\t<div class='footer-spacer'>&nbsp;</div>\n" +
     "</div>"
   );
 
@@ -456,47 +303,28 @@ angular.module("myApp").run(["$templateCache", function($templateCache) {
   );
 
   $templateCache.put("/src/modules/pages/login/login.html",
-    "<div ng-controller='LoginCtrl' class='login'>\r" +
+    "<div ng-controller='LoginCtrl' class='login'>\n" +
+    "<br>\n" +
+    "<div class=\"img-center\">\n" +
+    "\t<img src=\"{{appPathImg}}//or_logo.png\" alt=\"\">\n" +
+    "</div>\n" +
+    "\t<div app-login forgot-pass='forgotPass' login='login'></div>\n" +
     "\n" +
-    "<br>\r" +
     "\n" +
-    "<div class=\"img-center\">\r" +
+    "</div>\n" +
     "\n" +
-    "\t<img src=\"{{appPathImg}}//or_logo.png\" alt=\"\">\r" +
     "\n" +
-    "</div>\r" +
-    "\n" +
-    "\t<div app-login forgot-pass='forgotPass' login='login'></div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "</div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
     "\n"
   );
 
   $templateCache.put("/src/modules/pages/signup/signup.html",
-    "<div ng-controller='SignupCtrl' class='signup'>\r" +
+    "<div ng-controller='SignupCtrl' class='signup'>\n" +
+    "<br>\n" +
+    "<div class=\"img-center\">\n" +
+    "\t<img src=\"{{appPathImg}}//or_logo.png\" alt=\"\">\n" +
+    "</div>\n" +
     "\n" +
-    "<br>\r" +
-    "\n" +
-    "<div class=\"img-center\">\r" +
-    "\n" +
-    "\t<img src=\"{{appPathImg}}//or_logo.png\" alt=\"\">\r" +
-    "\n" +
-    "</div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\t<div app-signup signup='signup'></div>\r" +
-    "\n" +
+    "\t<div app-signup signup='signup'></div>\n" +
     "</div>"
   );
 
@@ -891,369 +719,7 @@ angular.module("myApp").run(["$templateCache", function($templateCache) {
     "\n" +
     "\r" +
     "\n" +
-    "\t<div class=\"container\">\r" +
-    "\n" +
     "\t\r" +
-    "\n" +
-    "\t<div class=\"row clearfix\">\r" +
-    "\n" +
-    "\t\t<div class=\"col-md-2 column\">\r" +
-    "\n" +
-    "\t\t</div>\r" +
-    "\n" +
-    "\t\t<div class=\"col-md-6 column\">\r" +
-    "\n" +
-    "\t\t\t<div class=\"carousel slide\" id=\"carousel-651403\">\r" +
-    "\n" +
-    "\t\t\t\t<ol class=\"carousel-indicators\">\r" +
-    "\n" +
-    "\t\t\t\t\t<li class=\"active\" data-slide-to=\"0\" data-target=\"#carousel-651403\">\r" +
-    "\n" +
-    "\t\t\t\t\t</li>\r" +
-    "\n" +
-    "\t\t\t\t\t<li data-slide-to=\"1\" data-target=\"#carousel-651403\">\r" +
-    "\n" +
-    "\t\t\t\t\t</li>\r" +
-    "\n" +
-    "\t\t\t\t\t<li data-slide-to=\"2\" data-target=\"#carousel-651403\">\r" +
-    "\n" +
-    "\t\t\t\t\t</li>\r" +
-    "\n" +
-    "\t\t\t\t</ol>\r" +
-    "\n" +
-    "\t\t\t\t<div class=\"carousel-inner\">\r" +
-    "\n" +
-    "\t\t\t\t\t<div class=\"item active\">\r" +
-    "\n" +
-    "\t\t\t\t\t\t<img alt=\"\" src=\"http://lorempixel.com/1600/500/sports/1\" />\r" +
-    "\n" +
-    "\t\t\t\t\t\t<div class=\"carousel-caption\">\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t<h4>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t\tFirst Thumbnail label\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t</h4>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t<p>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t\tCras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t</p>\r" +
-    "\n" +
-    "\t\t\t\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t\t\t<div class=\"item\">\r" +
-    "\n" +
-    "\t\t\t\t\t\t<img alt=\"\" src=\"http://lorempixel.com/1600/500/sports/2\" />\r" +
-    "\n" +
-    "\t\t\t\t\t\t<div class=\"carousel-caption\">\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t<h4>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t\tSecond Thumbnail label\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t</h4>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t<p>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t\tCras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t</p>\r" +
-    "\n" +
-    "\t\t\t\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t\t\t<div class=\"item\">\r" +
-    "\n" +
-    "\t\t\t\t\t\t<img alt=\"\" src=\"http://lorempixel.com/1600/500/sports/3\" />\r" +
-    "\n" +
-    "\t\t\t\t\t\t<div class=\"carousel-caption\">\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t<h4>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t\tThird Thumbnail label\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t</h4>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t<p>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t\tCras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t</p>\r" +
-    "\n" +
-    "\t\t\t\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t\t</div> <a class=\"left carousel-control\" href=\"#carousel-651403\" data-slide=\"prev\"><span class=\"glyphicon glyphicon-chevron-left\"></span></a> <a class=\"right carousel-control\" href=\"#carousel-651403\" data-slide=\"next\"><span class=\"glyphicon glyphicon-chevron-right\"></span></a>\r" +
-    "\n" +
-    "\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t<table class=\"table table-condensed table-hover\">\r" +
-    "\n" +
-    "\t\t\t\t<thead>\r" +
-    "\n" +
-    "\t\t\t\t\t<tr>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<th>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t#\r" +
-    "\n" +
-    "\t\t\t\t\t\t</th>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<th>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\tAdvertiser\r" +
-    "\n" +
-    "\t\t\t\t\t\t</th>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<th>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\tPayment Taken\r" +
-    "\n" +
-    "\t\t\t\t\t\t</th>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<th>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\tType\r" +
-    "\n" +
-    "\t\t\t\t\t\t</th>\r" +
-    "\n" +
-    "\t\t\t\t\t</tr>\r" +
-    "\n" +
-    "\t\t\t\t</thead>\r" +
-    "\n" +
-    "\t\t\t\t<tbody>\r" +
-    "\n" +
-    "\t\t\t\t\t<tr>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t1\r" +
-    "\n" +
-    "\t\t\t\t\t\t</td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t<a id=\"modal-895491\" href=\"http://www.layoutit.com/build#modal-container-895491\" role=\"button\" class=\"btn\" data-toggle=\"modal\">Launch demo modal</a>\r" +
-    "\n" +
-    "\t\t\t\t\t\t</td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\tlisten - Link\r" +
-    "\n" +
-    "\t\t\t\t\t\t</td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\tPhone: audio\r" +
-    "\n" +
-    "\t\t\t\t\t\t</td>\r" +
-    "\n" +
-    "\t\t\t\t\t</tr>\r" +
-    "\n" +
-    "\t\t\t\t\t<tr class=\"active\">\r" +
-    "\n" +
-    "\t\t\t\t\t\t<td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t1\r" +
-    "\n" +
-    "\t\t\t\t\t\t</td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\tSales Company2\r" +
-    "\n" +
-    "\t\t\t\t\t\t</td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t01/04/2012\r" +
-    "\n" +
-    "\t\t\t\t\t\t</td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\tPhone: Live\r" +
-    "\n" +
-    "\t\t\t\t\t\t</td>\r" +
-    "\n" +
-    "\t\t\t\t\t</tr>\r" +
-    "\n" +
-    "\t\t\t\t\t<tr class=\"success\">\r" +
-    "\n" +
-    "\t\t\t\t\t\t<td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t2\r" +
-    "\n" +
-    "\t\t\t\t\t\t</td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\tMarketing Company\r" +
-    "\n" +
-    "\t\t\t\t\t\t</td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t02/04/2012\r" +
-    "\n" +
-    "\t\t\t\t\t\t</td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\tPresentation\r" +
-    "\n" +
-    "\t\t\t\t\t\t</td>\r" +
-    "\n" +
-    "\t\t\t\t\t</tr>\r" +
-    "\n" +
-    "\t\t\t\t\t<tr class=\"warning\">\r" +
-    "\n" +
-    "\t\t\t\t\t\t<td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t3\r" +
-    "\n" +
-    "\t\t\t\t\t\t</td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\tHealth Food\r" +
-    "\n" +
-    "\t\t\t\t\t\t</td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t03/04/2012\r" +
-    "\n" +
-    "\t\t\t\t\t\t</td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\tVideo\r" +
-    "\n" +
-    "\t\t\t\t\t\t</td>\r" +
-    "\n" +
-    "\t\t\t\t\t</tr>\r" +
-    "\n" +
-    "\t\t\t\t\t<tr class=\"danger\">\r" +
-    "\n" +
-    "\t\t\t\t\t\t<td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t4\r" +
-    "\n" +
-    "\t\t\t\t\t\t</td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\tGreen Products\r" +
-    "\n" +
-    "\t\t\t\t\t\t</td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t04/04/2012\r" +
-    "\n" +
-    "\t\t\t\t\t\t</td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<td>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\tVideo: Live(Room)\r" +
-    "\n" +
-    "\t\t\t\t\t\t</td>\r" +
-    "\n" +
-    "\t\t\t\t\t</tr>\r" +
-    "\n" +
-    "\t\t\t\t</tbody>\r" +
-    "\n" +
-    "\t\t\t</table>\r" +
-    "\n" +
-    "\t\t\t <a id=\"modal-895491\" href=\"#modal-container-895491\" role=\"button\" class=\"btn\" data-toggle=\"modal\">Launch demo modal</a>\r" +
-    "\n" +
-    "\t\t\t\r" +
-    "\n" +
-    "\t\t\t<div class=\"modal fade\" id=\"modal-container-895491\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\r" +
-    "\n" +
-    "\t\t\t\t<div class=\"modal-dialog\">\r" +
-    "\n" +
-    "\t\t\t\t\t<div class=\"modal-content\">\r" +
-    "\n" +
-    "\t\t\t\t\t\t<div class=\"modal-header\">\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t<h4 class=\"modal-title\" id=\"myModalLabel\">\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t\tAd.title\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t</h4>\r" +
-    "\n" +
-    "\t\t\t\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<div class=\"modal-body\">\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t- Ad.location<br />ad.rating (Stars)<br />ad.reviews<br />ad.type(video/adDial)<br />ad.image<br />\r" +
-    "\n" +
-    "\t\t\t\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t\t\t\t<div class=\"modal-footer\">\r" +
-    "\n" +
-    "\t\t\t\t\t\t\t <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button> <button type=\"button\" class=\"btn btn-primary\">Save changes</button>\r" +
-    "\n" +
-    "\t\t\t\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t\t\t\r" +
-    "\n" +
-    "\t\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t\t\r" +
-    "\n" +
-    "\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t\r" +
-    "\n" +
-    "\t\t</div>\r" +
-    "\n" +
-    "\t\t<div class=\"col-md-4 column\">\r" +
-    "\n" +
-    "\t\t\t<img alt=\"140x140\" src=\"http://lorempixel.com/140/140/\" />\r" +
-    "\n" +
-    "\t\t\t<div class=\"panel panel-success\">\r" +
-    "\n" +
-    "\t\t\t\t<div class=\"panel-heading\">\r" +
-    "\n" +
-    "\t\t\t\t\t<h3 class=\"panel-title\">\r" +
-    "\n" +
-    "\t\t\t\t\t\tUser.picture\r" +
-    "\n" +
-    "\t\t\t\t\t</h3>\r" +
-    "\n" +
-    "\t\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t\t<div class=\"panel-body\">\r" +
-    "\n" +
-    "\t\t\t\t\tUser.Stats<br />stats.payoutDue<br />stats.awardpoints<br />stats.timeIn<br /><br />\r" +
-    "\n" +
-    "\t\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t\t<div class=\"panel-footer\">\r" +
-    "\n" +
-    "\t\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t</div>\r" +
-    "\n" +
-    "\t\t</div>\r" +
-    "\n" +
-    "\t</div>\r" +
-    "\n" +
-    "</div>\r" +
     "\n" +
     "</div>"
   );

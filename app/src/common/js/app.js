@@ -87,14 +87,14 @@ config(['$routeProvider', '$locationProvider', 'appConfigProvider', '$compilePro
             redirectTo: appPathRoute + 'home/home.html'
         });
 
-    // $routeProvider.when(appPathRoute + 'login', {
-    //     redirectTo: appPathRoute + 'login/login.html',
-    //     resolve: {
-    //         auth: function(appAuth) {
-    //             return appAuth.checkSess({});
-    //         }
-    //     }
-    // });
+        // $routeProvider.when(appPathRoute + 'login', {
+        //     redirectTo: appPathRoute + 'login/login.html',
+        //     resolve: {
+        //         auth: function(appAuth) {
+        //             return appAuth.checkSess({});
+        //         }
+        //     }
+        // });
         $routeProvider.when(appPathRoute + 'signup', {
             redirectTo: pagesPath + 'signup/signup.html',
             resolve: {
@@ -193,12 +193,29 @@ config(['$routeProvider', '$locationProvider', 'appConfigProvider', '$compilePro
         // $routeProvider.when(appPathRoute+'test', {templateUrl: pagesPath+'test/test.html'});
         $routeProvider.when(appPathRoute + 'dev-test/test', {
             templateUrl: pagesPath + 'dev-test/test/test.html',
-            resolve: {
-                auth: function(appAuth) {
-                    return appAuth.checkSess({});
+
+            auth: {
+                loggedIn: {
+
+                },
+                member: {
+                    redirect: 'auth-member'
                 }
             }
+
         });
+
+
+        // appAuth.checkSess({
+        //     auth: {
+        //         loggedIn: {user.role.platinum},       //require user to be logged in to view this page
+        //         //require user to be a member (user.status =='p.member') to view this page and if NOT, redirect user to 'auth-member' page
+        //         member: {
+        //             redirect: 'auth-member'
+        //         }
+        //     }
+        // });
+
 
         $routeProvider.when(appPathRoute + 'dev-test/design', {
             templateUrl: pagesPath + 'dev-test/design/design.html',
@@ -225,7 +242,7 @@ config(['$routeProvider', '$locationProvider', 'appConfigProvider', '$compilePro
 
         //yeoman generated routes here - DO NOT DELETE THIS COMMENT AS IT IS USED BY YEOMAN TO GENERATE A NEW ROUTE!
         $routeProvider.when(appPathRoute + 'New Concept', {
-            templateUrl: pagesPath + 'home/newConcept/New Concept/New Concept.html',
+            templateUrl: pagesPath + 'newConcept/newconcept.html',
             resolve: {
                 auth: function(appAuth) {
                     return appAuth.checkSess({});
@@ -233,7 +250,7 @@ config(['$routeProvider', '$locationProvider', 'appConfigProvider', '$compilePro
             }
         });
         $routeProvider.when(appPathRoute + 'pricing', {
-            templateUrl: pagesPath + '/pricing/pricing.html',
+            templateUrl: pagesPath + 'pricing/pricing.html',
             resolve: {
                 auth: function(appAuth) {
                     return appAuth.checkSess({});
@@ -241,7 +258,7 @@ config(['$routeProvider', '$locationProvider', 'appConfigProvider', '$compilePro
             }
         });
         $routeProvider.when(appPathRoute + 'dialpad', {
-            templateUrl: pagesPath + '/dialpad/dialpad.html',
+            templateUrl: pagesPath + 'dialpad/dialpad.html',
             resolve: {
                 auth: function(appAuth) {
                     return appAuth.checkSess({});

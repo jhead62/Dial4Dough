@@ -18,17 +18,17 @@
 		<!-- Logout Button -->
 		<!-- Signup -->
 	
-			<ul ng-repeat='button in nav.buttons.right' class='nav-header-right pure-menu-horizontal  {{button.classes.cont}}'>
-				<!-- <a ng-if='!button.html' ng-show='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-href = '{{button.href}}'>
+			<ul ng-repeat='button in nav.buttons.right' class='nav-header-right right pure-menu-horizontal  {{button.classes.cont}}'>
+				<a ng-if='!button.html' ng-show='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-href = '{{button.href}}'>
 					<i class='nav-header-icon-button-icon {{button.icon}}'></i>
 					<div class='nav-header-icon-button-text' ng-bind-html='button.iconHtml'></div>
-				</a> -->
-				<!-- <li ng-if='!button.html' ng-hide='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-click = 'button.click()'>
+				</a>
+				<li ng-if='!button.html' ng-hide='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-click = 'button.click()'>
 					<i class='nav-header-icon-button-icon {{button.icon}}'></i>
 					<div class='nav-header-icon-button-text' ng-bind-html='button.iconHtml'></div>
-				</li> -->
-				<a ng-if='button.html' ng-show='button.href' class='nav-header-button {{button.classes.button}}' ng-href = '{{button.href}}' ng-bind-html='button.html'></a>
-				<div ng-if='button.html' ng-hide='button.href' class='nav-header-button {{button.classes.button}}' ng-click = 'button.click()' ng-bind-html='button.html'></div>
+				</li>
+				<a ng-if='button.html' ng-show='button.href' class='nav-header-right {{button.classes.button}}' ng-href = '{{button.href}}' ng-bind-html='button.html'></a>
+				<!-- <div ng-if='button.html' ng-hide='button.href' class='nav-header-button {{button.classes.button}}' ng-click = 'button.click()' ng-bind-html='button.html'></div> -->
 			</ul>
 
 		
