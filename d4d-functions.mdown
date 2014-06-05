@@ -40,3 +40,15 @@ Looking for a creative Programers.
 		Twilio Function will be attached to the modal. The depending on the ad.type -- the twilio functions will synce up
 		the affiliate Id and the user.phone. The user will have the options to confirm ad.
 		-- After ad - A rating/Review option will asked the user "What do they think of the ad". After selection the gets user.role.credits.
+
+
+First Step Integrations:
+- PAP: php -> nodejs - The api will interact with login/regististration
+	- payouts --
+	- Add user to appropiate campains e.g. user.role. --Platinum/bronze/gold
+	- ip -- Address -- location
+	- Affiliate Panel
+
+- Twilio Connection -- 
+	- Ater the ad is viewed -- send completion data to PAP.
+	
