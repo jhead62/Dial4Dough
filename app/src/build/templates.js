@@ -1,13 +1,19 @@
 angular.module("myApp").run(["$templateCache", function($templateCache) {
 
   $templateCache.put("/src/modules/services/nav/header-centered/header-centered.html",
-    "<div class=\"pure-menu pure-menu-open pure-menu-horizontal {{nav.classes.cont}}\">\r" +
+    "<div class=\"pure-menu pure-menu-open pure-menu-horizontal  {{nav.classes.cont}}\">\r" +
     "\n" +
-    "    <a href=\"{{appPath}}/home/home.html\" class=\"pure-menu-heading\"><img src=\"{{appPathImg}}/d4d_smLogo.png\" alt=\"\"></p>\r" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <a href=\"{{staticPath}}\" class=\"pure-menu-heading\"><img src=\"{{appPathImg}}/d4d_smLogo.png\" alt=\"\"></p>\r" +
     "\n" +
     "\t\t</a>\r" +
     "\n" +
-    "    <ul ng-repeat='button in nav.buttons.left' class=\"{{button.classes.cont}}\">\r" +
+    "    <ul  ng-repeat='button in nav.buttons.left' class=\"{{button.classes.cont}}\">\r" +
     "\n" +
     "        <li>\r" +
     "\n" +
@@ -23,7 +29,7 @@ angular.module("myApp").run(["$templateCache", function($templateCache) {
     "\n" +
     "\t\t\t\r" +
     "\n" +
-    "\t\t</li>\r" +
+    "\t\t</li></ul>\r" +
     "\n" +
     "\t\t<!-- navbar Right -->\r" +
     "\n" +
@@ -33,31 +39,43 @@ angular.module("myApp").run(["$templateCache", function($templateCache) {
     "\n" +
     "\t\t<!-- Signup -->\r" +
     "\n" +
+    "\t\r" +
+    "\n" +
+    "\t\t\t<ul ng-repeat='button in nav.buttons.right' class='nav-header-right pure-menu-horizontal  {{button.classes.cont}}'>\r" +
+    "\n" +
+    "\t\t\t\t<!-- <a ng-if='!button.html' ng-show='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-href = '{{button.href}}'>\r" +
+    "\n" +
+    "\t\t\t\t\t<i class='nav-header-icon-button-icon {{button.icon}}'></i>\r" +
+    "\n" +
+    "\t\t\t\t\t<div class='nav-header-icon-button-text' ng-bind-html='button.iconHtml'></div>\r" +
+    "\n" +
+    "\t\t\t\t</a> -->\r" +
+    "\n" +
+    "\t\t\t\t<!-- <li ng-if='!button.html' ng-hide='button.href' class='nav-header-button nav-header-icon-button {{button.classes.button}}' ng-click = 'button.click()'>\r" +
+    "\n" +
+    "\t\t\t\t\t<i class='nav-header-icon-button-icon {{button.icon}}'></i>\r" +
+    "\n" +
+    "\t\t\t\t\t<div class='nav-header-icon-button-text' ng-bind-html='button.iconHtml'></div>\r" +
+    "\n" +
+    "\t\t\t\t</li> -->\r" +
+    "\n" +
+    "\t\t\t\t<a ng-if='button.html' ng-show='button.href' class='nav-header-button {{button.classes.button}}' ng-href = '{{button.href}}' ng-bind-html='button.html'></a>\r" +
+    "\n" +
+    "\t\t\t\t<div ng-if='button.html' ng-hide='button.href' class='nav-header-button {{button.classes.button}}' ng-click = 'button.click()' ng-bind-html='button.html'></div>\r" +
+    "\n" +
+    "\t\t\t</ul>\r" +
+    "\n" +
     "\r" +
     "\n" +
     "\t\t\r" +
     "\n" +
-    "    </ul>\r" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <ul ng-repeat='button in nav.buttons.right' class=\"{{button.classes.cont}}\">\r" +
-    "\n" +
-    "    \t<li>\r" +
-    "\n" +
-    "    \t\t<div ng-if='!button.html' ng-hide='button.href' class=\"nav-header-button nav-header-icon-button {{button.classes.button}}\" ng-click='button.click()'>\r" +
-    "\n" +
-    "    \t\t<a ng-if='button.html' ng-show='button.href' class=\"{{button.classes.button}}\" ng-href='{{button.href}}' ng-bind-html='button.html'></a>\r" +
-    "\n" +
-    "    \t</li>\r" +
+    "</div>\r" +
     "\n" +
     "\r" +
-    "\n" +
-    "    </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    </div>\r" +
     "\n" +
     "<!-- \r" +
     "\n" +
@@ -440,99 +458,19 @@ angular.module("myApp").run(["$templateCache", function($templateCache) {
   $templateCache.put("/src/modules/pages/login/login.html",
     "<div ng-controller='LoginCtrl' class='login'>\r" +
     "\n" +
+    "<br>\r" +
+    "\n" +
+    "<div class=\"img-center\">\r" +
+    "\n" +
+    "\t<img src=\"{{appPathImg}}//or_logo.png\" alt=\"\">\r" +
+    "\n" +
+    "</div>\r" +
+    "\n" +
     "\t<div app-login forgot-pass='forgotPass' login='login'></div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "<div data-ng-controller=\"RegisterCtrl\">\r" +
-    "\n" +
-    "    <div ng-repeat=\"error in registerError\">\r" +
-    "\n" +
-    "        <div class=\"alert alert-danger animated fadeIn\">{{error.msg}}</div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "    <div class=\"alert alert-danger animated fadeIn\" ng-show=\"usernameError\">{{usernameError}}</div>\r" +
-    "\n" +
     "\r" +
-    "\n" +
-    "    <h1>Register</h1>\r" +
-    "\n" +
-    "    <form ng-submit=\"register()\" class=\"signup form-horizontal\">\r" +
-    "\n" +
-    "        <div class=\"form-group\">\r" +
-    "\n" +
-    "            <label for=\"name\" class=\"col-md-4 control-label\">Full Name</label>\r" +
-    "\n" +
-    "            <div class=\"col-md-8\">\r" +
-    "\n" +
-    "                <input id=\"name\" type=\"text\" name=\"name\" placeholder=\"Full name\" class=\"form-control\" ng-model=\"user.name\"/>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"form-group\">\r" +
-    "\n" +
-    "            <label for=\"email\" class=\"col-md-4 control-label\">Email</label>\r" +
-    "\n" +
-    "            <div class=\"col-md-8\">\r" +
-    "\n" +
-    "                <input id=\"email\" type=\"email\" name=\"email\" placeholder=\"Email\" class=\"form-control\" ng-model=\"user.email\"/>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"form-group\">\r" +
-    "\n" +
-    "            <label for=\"username\" class=\"col-md-4 control-label\">Username</label>\r" +
-    "\n" +
-    "            <div class=\"col-md-8\">\r" +
-    "\n" +
-    "                <input id=\"username\" type=\"text\" name=\"username\" placeholder=\"Username\" class=\"form-control\" ng-model=\"user.username\"/>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"form-group\">\r" +
-    "\n" +
-    "            <label for=\"password\" class=\"col-md-4 control-label\">Password</label>\r" +
-    "\n" +
-    "            <div class=\"col-md-8\">\r" +
-    "\n" +
-    "                <input id=\"password\" type=\"password\" name=\"password\" placeholder=\"Password\" class=\"form-control\" ng-model=\"user.password\"/>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"form-group\">\r" +
-    "\n" +
-    "            <label for=\"confirmPassword\" class=\"col-md-4 control-label\">Repeat Password</label>\r" +
-    "\n" +
-    "            <div class=\"col-md-8\">\r" +
-    "\n" +
-    "                <input id=\"confirmPassword\" type=\"password\" name=\"confirmPassword\" placeholder=\"Password\" class=\"form-control\" ng-model=\"user.confirmPassword\"/>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"form-group\">\r" +
-    "\n" +
-    "            <div class=\"col-md-offset-4 col-md-8\">\r" +
-    "\n" +
-    "                <button type=\"submit\" class=\"btn btn-primary\">Sign up</button>&nbsp;\r" +
-    "\n" +
-    "                or&nbsp;<a ui-sref='auth.login' class=\"show-login\">login</a>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </form>\r" +
     "\n" +
     "</div>\r" +
     "\n" +
@@ -541,26 +479,21 @@ angular.module("myApp").run(["$templateCache", function($templateCache) {
     "\r" +
     "\n" +
     "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\t\r" +
-    "\n" +
-    "</div>"
+    "\n"
   );
 
   $templateCache.put("/src/modules/pages/signup/signup.html",
     "<div ng-controller='SignupCtrl' class='signup'>\r" +
+    "\n" +
+    "<br>\r" +
+    "\n" +
+    "<div class=\"img-center\">\r" +
+    "\n" +
+    "\t<img src=\"{{appPathImg}}//or_logo.png\" alt=\"\">\r" +
+    "\n" +
+    "</div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "\t<div app-signup signup='signup'></div>\r" +
     "\n" +

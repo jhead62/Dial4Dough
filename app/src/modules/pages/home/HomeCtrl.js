@@ -5,5 +5,10 @@
 
 'use strict';
 
-angular.module('myApp').controller('HomeCtrl', ['$scope', function($scope) {
-}]);
+angular.module('myApp').controller('HomeCtrl', ['$scope',
+    function($scope) {
+
+        //read the cookie, and Anounce the users name on the page.
+
+    }
+]);

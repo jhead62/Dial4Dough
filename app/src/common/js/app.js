@@ -87,14 +87,14 @@ config(['$routeProvider', '$locationProvider', 'appConfigProvider', '$compilePro
             redirectTo: appPathRoute + 'home/home.html'
         });
 
-        $routeProvider.when(appPathRoute + 'login', {
-            redirectTo: appPathRoute + 'login/login.html',
-            resolve: {
-                auth: function(appAuth) {
-                    return appAuth.checkSess({});
-                }
-            }
-        });
+    // $routeProvider.when(appPathRoute + 'login', {
+    //     redirectTo: appPathRoute + 'login/login.html',
+    //     resolve: {
+    //         auth: function(appAuth) {
+    //             return appAuth.checkSess({});
+    //         }
+    //     }
+    // });
         $routeProvider.when(appPathRoute + 'signup', {
             redirectTo: pagesPath + 'signup/signup.html',
             resolve: {
@@ -179,7 +179,15 @@ config(['$routeProvider', '$locationProvider', 'appConfigProvider', '$compilePro
                 }
             }
         });
-
+        //Login -- Page
+        $routeProvider.when(appPathRoute + 'login', {
+            templateUrl: pagesPath + 'login/login.html',
+            resolve: {
+                auth: function(appAuth) {
+                    return appAuth.checkSess({});
+                }
+            }
+        });
 
         //dev-test
         // $routeProvider.when(appPathRoute+'test', {templateUrl: pagesPath+'test/test.html'});

@@ -138,6 +138,13 @@ factory('appNavConfig', ['appConfig', 'jrgArray',
                     click: function() {
                         self.historyBack({});
                     }
+                    //};
+                    // this.components.loginButton = {
+                    //     //iconL 'fa fa-icon-left',
+                    //     //html: "",
+                    //     click: function() {
+                    //         self.historyBack({});
+                    //     }
                 };
 
                 this.components.headerCentered = {
@@ -161,17 +168,25 @@ factory('appNavConfig', ['appConfig', 'jrgArray',
                                 html: 'register',
                                 href: this.paths.appPathLink + 'register'
 
+                            }, {
+                                //html: 'login',
+                                //href: this.paths.appPathLink + 'login'
+                            },
+
+                            {
+                                //icon: 'fa fa-sign-out',
+                                //iconHtml: 'Logout',
+                                //href: this.paths.appPathLink + 'logout'
                             }
                         ],
 
 
                         right: [{
-                                //icon: 'fa fa-sign-in',
-                                //html: 'Signup',
-                                //iconHtml: 'Register',
-                                //href: this.paths.appPathLink + 'signup'
-                            }
-                            //now toggling this in HeaderCtrl based on logged in status
+                                icon: 'fa fa-sign-in',
+                                html: 'login',
+                                iconHtml: 'login',
+                                href: this.paths.appPathLink + 'login'
+                            } //now toggling this in HeaderCtrl based on logged in status
                             // {
                             //     //icon: 'fa fa-sign-out',
                             //     iconHtml: 'Logout',

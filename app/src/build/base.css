@@ -7764,11 +7764,11 @@ overflow:hidden;
   font-size: 9pt;
   line-height: 11pt;
 }
-.nav-header-button.icon-only .nav-header-icon-button-icon {
-  font-size: 21pt;
-}
 .nav-header-button-cont {
   position: absolute;
+}
+.nav-header-right {
+  float: right;
 }
 .nav-header-left,
 .nav-header-right {
@@ -8251,12 +8251,18 @@ a.pure-button-primary {
     min-width: 250px;
   }
 }
+.img-center {
+  text-align: center;
+}
 .signup {
   width: 100%;
   margin: 0 auto;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+.img-center {
+  text-align: center;
 }
 @media (min-width: 425px) {
   .signup {
