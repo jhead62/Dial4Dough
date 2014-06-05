@@ -1,17 +1,25 @@
 # Dial4dough -- App
 
 Looking for a creative Programers.
-- What is a creative programer? 
+  
+###What is a creative programer?   
+
 	A person who is passionate about their craft, they would code for free if their wasn't need for money.
-	-- Skilled with PHP, Javascript, php --> Nodejs
+	  
+-- Skilled with PHP, Javascript, php --> Nodejs
+  
 	-- Mobile Application Knowledge
+  
 	-- famo.us -- Knowledge **Great**
 	-- Twilio -- Javascript Knowledge
 	-- GeoLocation integration
 	-- Google Charts
 	-- Paypal Api.
 
-
+If you have skills in these areas. Feel free to contact me.  
+ 
+Josh.
+<matrixblend@yahoo.com>
 
 	##Things Needed for the site.
 	Api For Pap:
@@ -23,7 +31,8 @@ Looking for a creative Programers.
 			Payment information
 			credits due
 			ads that have been clicked
-			tracking data of what add has been clicked.
+			tracking data of what add has been clicked.  
+
 
 	##Modules --
 		Login - should recoginze the type of user that is logging in
@@ -57,16 +66,26 @@ Looking for a creative Programers.
 		-- After ad - A rating/Review option will asked the user "What do they think of the ad". After selection the gets user.role.credits.
 
 
-First Step Integrations:
--- The PAP API will be used for the central point for the data.
-	The mongod Database is used for the adPad to Dial4dough --for instant updates  --
+###First Step Integrations:
+-- The PAP API will be used for the central point for the data.  
+
+	The mongod Database is used for the adPad to Dial4dough --for instant updates  --  
+
 	-- Instant help integrations
-- PAP: php -> nodejs - The api will interact with login/regististration
-	- payouts --
-	- Add user to appropiate campains e.g. user.role. --Platinum/bronze/gold
-	- ip -- Address -- location
+  
+- PAP: php -> nodejs - The api will   
+interact with login/regististration
+	  
+- payouts --
+  
+	- Add user to appropiate campains e.g.   
+user.role. --Platinum/bronze/gold
+	  
+- ip -- Address -- location
+  
 	- Affiliate Panel
 
+  
 - Twilio Connection -- 
 	- Ater the ad is viewed -- send completion data to PAP.
 
