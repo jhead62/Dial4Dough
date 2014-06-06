@@ -5,13 +5,13 @@ In general you'll have 2-3 terminal/command prompt windows open at once - one fo
 
 Variables used in the instructions below; replace appropriately
 
-GIT_NAME Joe Bob
+GIT_NAME Josh Head
 
-GIT_EMAIL youremail@gmail.com
+GIT_EMAIL jhead12@fullsail.edu
 
-GIT_REPO_URL git@github.com:jackrabbitsgroup/my-app.git
+GIT_REPO_URL jhead12@github.com:dial4dough/dial4dough.git
 
-GIT_REPO_URL_HTTPS https://github.com/jackrabbitsgroup/my-app.git
+GIT_REPO_URL_HTTPS https://github.com/dial4dough/dial4dough.git
 
 LOCAL_PARENT_FOLDER /website
 

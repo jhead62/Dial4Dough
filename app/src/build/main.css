@@ -7770,6 +7770,10 @@ overflow:hidden;
 .nav-header-button-cont {
   position: absolute;
 }
+.nav-header-right {
+  float: right;
+  margin: 23px auto;
+}
 .nav-header-left,
 .nav-header-right {
   min-width: 45px;
@@ -8251,12 +8255,18 @@ a.pure-button-primary {
     min-width: 250px;
   }
 }
+.img-center {
+  text-align: center;
+}
 .signup {
   width: 100%;
   margin: 0 auto;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+.img-center {
+  text-align: center;
 }
 @media (min-width: 425px) {
   .signup {

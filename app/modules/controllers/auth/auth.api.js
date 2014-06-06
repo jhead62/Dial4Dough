@@ -234,10 +234,10 @@ AuthApi.prototype.rpcCreateLogin = function() {
                 type: 'string',
                 info: "User password"
             }
-            //city:       {required: true, type: 'string', info: "User city"},
-            //state:      {required: true, type: ' string', info: "User state"},
+            //city:     {required: true, type: 'string', info: "User city"},
+            //state:    {required: true, type: ' string', info: "User state"},
             //refid: 	{required:false, type: 'number', info: "User reid"},
-            //country: 	{required: true, type: 'string', info: "user country"},
+            //country: 	{required: true, type: 'string', info: "user country"}
             // }
         },
         returns: {
