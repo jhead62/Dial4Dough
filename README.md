@@ -6,7 +6,8 @@ Looking for a creative Programers.
 
 	A person who is passionate about their craft, they would code for free if their wasn't need for money.
 	  
--- Skilled with PHP, Javascript, php --> Nodejs
+  
+	-- Skilled with PHP, Javascript, php -->	 Nodejs
   
 	-- Mobile Application Knowledge
   
@@ -87,6 +88,8 @@ user.role. --Platinum/bronze/gold
 
   
 - Twilio Connection -- 
-	- Ater the ad is viewed -- send completion data to PAP.
+	- After the ad is viewed -- send completion data to PAP.
+	- Integrated phone systems for the advertisers and clients
+	- Live calls -- Time limits
 
 	
