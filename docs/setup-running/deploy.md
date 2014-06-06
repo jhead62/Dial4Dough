@@ -10,7 +10,7 @@ If you haven't done so already, purchase a (new) Linux server (i.e. from Digital
 	1. `operatingSystem` to `linux`
 	2. `forever` to `1` so it will auto restart forever on code changes
 	3. `server.domain` and `email.domain` to the domain (or IP address) of the new server
-	4. `sauceLabs` credentials (if you don't already have a Sauce Labs account, create one (they have free tiers) since the selenium standalone server with chrome doesn't currently work on linux (while we could try to get phantom-js working, it's better to run on multiple platforms anyway)
+	4. `git` credentials (if you don't already have a Sauce Labs account, create one (they have free tiers) since the selenium standalone server with chrome doesn't currently work on linux (while we could try to get phantom-js working, it's better to run on multiple platforms anyway)
 	5. [should also update unique keys and credentials, such as facebook app id, google app id, etc.]
 	6. then copy this new config file to make the test config, which should be named `config-[new-server-environment].test.json` and edit it to change at least:
 		1. `server.port`

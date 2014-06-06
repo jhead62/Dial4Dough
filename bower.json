@@ -32,7 +32,8 @@
         "angular-google-auth": "latest",
         "angular-forminput": "latest",
         "angular-socket-io": "latest",
-        "pure": "~0.4.2"
+        "pure": "~0.4.2",
+        "kendo-ui": "~2014.1.318"
     },
     "license": "MIT",
     "resolutions": {

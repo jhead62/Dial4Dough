@@ -22,7 +22,7 @@ angular.module('jrg', [
     //services
     'jackrabbitsgroup.angular-string',
     'jackrabbitsgroup.angular-array',
-    // 'jackrabbitsgroup.angular-facebook-auth',
+    //'jackrabbitsgroup.angular-facebook-auth',
     'jackrabbitsgroup.angular-google-auth',
     //directives
     'jackrabbitsgroup.angular-forminput'

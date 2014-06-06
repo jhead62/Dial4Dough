@@ -321,7 +321,7 @@ angular.module("myApp").run(["$templateCache", function($templateCache) {
     "<div ng-controller='SignupCtrl' class='signup'>\n" +
     "<br>\n" +
     "<div class=\"img-center\">\n" +
-    "\t<img src=\"{{appPathImg}}//or_logo.png\" alt=\"\">\n" +
+    "\t<img src=\"{{appPathImg}}//or_logo.png\" alt=\"logo\">\n" +
     "</div>\n" +
     "\n" +
     "\t<div app-signup signup='signup'></div>\n" +

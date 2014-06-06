@@ -135,7 +135,8 @@ AuthApi.prototype.rpcLogin = function() {
                             'email': 1,
                             'phone': 1,
                             'first_name': 1,
-                            'last_name': 1
+                            'last_name': 1,
+                            'city': 1
                         }
                     };
                     var fill_promise = UserMod.fillInfo(db, {

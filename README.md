@@ -16,6 +16,8 @@ Looking for a creative Programers.
 	-- GeoLocation integration
 	-- Google Charts
 	-- Paypal Api.
+	-- kendo.js -- 
+	
 
 If you have skills in these areas. Feel free to contact me.  
  

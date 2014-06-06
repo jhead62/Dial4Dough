@@ -71,7 +71,7 @@ function Auth(options) {
     self = this;
 
     // db =this.opts.db;
-    // Emailer = this.opts.Emailer;
+    Emailer = this.opts.Emailer;
     // StringMod =this.opts.StringMod;
     MongoDBMod = this.opts.MongoDBMod;
 }
