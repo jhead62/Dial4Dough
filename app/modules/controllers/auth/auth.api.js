@@ -213,32 +213,48 @@ AuthApi.prototype.rpcCreateLogin = function() {
     return {
         info: 'Create new login',
         params: {
-            // data: {
-            email: {
-                required: true,
-                type: 'string',
-                info: "User email (must be unique)"
-            },
-            first_name: {
-                required: true,
-                type: 'string',
-                info: "User first name"
-            },
-            last_name: {
-                required: true,
-                type: 'string',
-                info: "User last name"
-            },
-            password: {
-                required: true,
-                type: 'string',
-                info: "User password"
+            data: {
+                email: {
+                    required: true,
+                    type: 'string',
+                    info: "User email (must be unique)"
+                },
+                first_name: {
+                    required: true,
+                    type: 'string',
+                    info: "User first name"
+                },
+                last_name: {
+                    required: true,
+                    type: 'string',
+                    info: "User last name"
+                },
+                password: {
+                    required: true,
+                    type: 'string',
+                    info: "User password"
+                },
+                city: {
+                    required: true,
+                    type: 'string',
+                    info: "User city"
+                },
+                state: {
+                    required: true,
+                    type: ' string',
+                    info: "User state"
+                },
+                refid: {
+                    required: false,
+                    type: 'number',
+                    info: "User reid"
+                },
+                country: {
+                    required: true,
+                    type: 'string',
+                    info: "user country"
+                }
             }
-            //city:     {required: true, type: 'string', info: "User city"},
-            //state:    {required: true, type: ' string', info: "User state"},
-            //refid: 	{required:false, type: 'number', info: "User reid"},
-            //country: 	{required: true, type: 'string', info: "user country"}
-            // }
         },
         returns: {
             user: sampleUserReturn
