@@ -29,6 +29,18 @@ angular.module('myApp').controller('SignupCtrl', ['$scope', 'appHttp', 'UserMode
                 callback({});
             });
         };
+        $scope.productsDataSource = function() {
+            type: "odata",
+            serverFiltering: true,
+            transport: {
+                read: {
+                    url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                }
+            }
+
+        };
+
+
 
     }
 ]);

@@ -323,7 +323,14 @@ angular.module("myApp").run(["$templateCache", function($templateCache) {
     "<div class=\"img-center\">\n" +
     "\t<img src=\"{{appPathImg}}//or_logo.png\" alt=\"logo\">\n" +
     "</div>\n" +
-    "\n" +
+    "<select kendo-combo-box\n" +
+    "                k-placeholder=\"'Select product'\"\n" +
+    "                k-data-text-field=\"'ProductName'\"\n" +
+    "                k-data-value-field=\"'ProductID'\"\n" +
+    "                k-filter=\"contains\"\n" +
+    "                k-auto-bind=\"false\"\n" +
+    "                k-min-length=\"3\"\n" +
+    "                k-data-source=\"productsDataSource\"></select>\n" +
     "\t<div app-signup signup='signup'></div>\n" +
     "</div>"
   );

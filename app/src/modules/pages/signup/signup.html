@@ -3,6 +3,13 @@
 <div class="img-center">
 	<img src="{{appPathImg}}//or_logo.png" alt="logo">
 </div>
-
+<select kendo-combo-box
+                k-placeholder="'Select product'"
+                k-data-text-field="'ProductName'"
+                k-data-value-field="'ProductID'"
+                k-filter="contains"
+                k-auto-bind="false"
+                k-min-length="3"
+                k-data-source="productsDataSource"></select>
 	<div app-signup signup='signup'></div>
 </div>

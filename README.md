@@ -1,12 +1,77 @@
 # Dial4dough -- App
 
-Looking for a creative Programers.
-  
-###What is a creative programer?   
+This app will connect to multiple api's.
+##login/Registration 
+- Login/Registration (userSession, userId,userRole).
+	userRole = {platinum,Gold, Bronze}
+	gold.member     = {
+			access: 'monthly',
+			autoPay: true,
+			upgradable: true to Platinum.
+			limitation: "Monthly"
+			payment: '$10',
+			ratings: 	number,
+			comments:	string,
+			instant:	n/a,
+			specialOffers: true,
+			geolocationOffers: true,
+			commisions: $10 per Platinum,
+			ugradeMsg: "Platinum is for the prolevel user who wants to create value for the Advertisers"
 
-	A person who is passionate about their craft, they would code for free if their wasn't need for money.
-	  
-  
+			},
+	platinum.member = {
+			access: 'yearly', //100%
+			autoPay: true,
+			upgradable: false,
+			limitation: "yearly"
+			payment: '$50',
+			catagory: multilistings
+			ratings: 	number,
+			comments:	string,
+			instant:	true,
+			//instant is the ability to review ads that are available instantaniously.
+			specialOffers: true, //PopUp Alert -- Based upon User Interest.
+			commisions: $25 per Platinum
+			specialCommision: $2 per Gold member,
+			adClickCommisions: 10% commision for Gold and Platinum members.
+	},
+	Bronze.member={ //FreeMember
+			access: 'unlimited',
+			autoPay: false,
+			upgradable: true,
+			limitation: "10% of ads per day"
+			payment: '0',
+			ratings: 	number,
+			comments:	string,
+			instant:	false,
+			morePopups: True,
+			bannerAds: true,
+			msg: "When you upgrade you releave some stresses",
+			purchaseRequired: Every $50 at least 10% spent on Advertiser.
+			geolocation: All,
+
+
+			//instant is the ability to review ads that are available instantaniously.
+			specialOffers: true, //PopUp Alert -- Based upon User Interest.
+
+	} 
+
+	gold.member =	Monthly Recuring payment $10
+	platinum.member = Yearly Recurring $50
+	bronze.member   = free -- Limited Access.
+	userId	=	pap.ID
+	pap.merchant === limited.role('admin.settings')
+
+
+#Campaign Manager
+- Each campaign will be assigned to specific userRole()
+	platinum/gold/bronze
+
+##Interface
+The system will be connected to the adPad web application.
+--Pap will use the 
+
+
 	-- Skilled with PHP, Javascript, php -->	 Nodejs
   
 	-- Mobile Application Knowledge
@@ -59,6 +124,7 @@ Josh.
 		-- Mongodb -- The list will have some user data, and details of the Ads.
 
 	##Needs Completion 
+
 	-- Login-- The login page is not functioning properly.
 	--Register-- needs the user.role selections
 		-- user information that will sync properly with Pap.

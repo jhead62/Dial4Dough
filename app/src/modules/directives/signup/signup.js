@@ -44,6 +44,9 @@ angular.module('app').directive('appSignup', ['appConfig',
                     "<div jrg-forminput type='password' placeholder='Password (6+ characters)' label='Password' ng-model='formVals.password' opts='' required ng-minlength='6'></div>" +
                     "<div jrg-forminput type='password' placeholder='Password Again' ng-model='formVals.password_confirm' opts='' required></div>" +
 
+                "<div jrg-forminput type='text' placeholder='City' ng-model='formVals.city' opts='' required></div>" +
+                    "<div jrg-forminput type='text' placeholder='state' ng-model='formVals.state' opts='' required></div>" +
+
                 "<button class='btn btn-primary jrg-forminput-submit' type='submit' >Sign Up</button>" +
                     "</form>" +
 
@@ -76,6 +79,11 @@ angular.module('app').directive('appSignup', ['appConfig',
                                 type: 'error',
                                 msg: 'Must enter a first and last name'
                             });
+                        } else if ($scope.formVals.city.indexOf(' ') < 0) {
+                            $scope.$emit('evtAppalertAlert', {
+                                type: 'error',
+                                msg: 'Must enter your city'
+                            });
                         } else {
                             var valid = true;
                             $scope.$emit('evtAppalertAlert', {
@@ -85,7 +93,8 @@ angular.module('app').directive('appSignup', ['appConfig',
                             var vals = {
                                 email: $scope.formVals.email,
                                 password: $scope.formVals.password,
-                                password_confirm: $scope.formVals.password_confirm
+                                password_confirm: $scope.formVals.password_confirm,
+                                city: $scope.formVals.city
                             };
                             //break into first & last name
                             var minNameLength = 2;
