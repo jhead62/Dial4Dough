@@ -15,7 +15,7 @@ This app will connect to multiple api's.
 			instant:	n/a,
 			specialOffers: true,
 			geolocationOffers: true,
-			commisions: $10 per Platinum,
+			commisions: $10 per Platinum member recruited,
 			ugradeMsg: "Platinum is for the prolevel user who wants to create value for the Advertisers"
 
 			},
@@ -55,6 +55,22 @@ This app will connect to multiple api's.
 			specialOffers: true, //PopUp Alert -- Based upon User Interest.
 
 	} 
+	
+	adPad(advertisersPage){
+			user.name
+			password
+			company.name
+			company Address
+			Company representatives name
+			email address
+			Business telephone number
+			Fax number
+			FName, LName, Geo location, upload audio File, target link 
+			Products:  description, location, price
+			Ad Types:  Telephone audio files, Banner, *live phone, video  
+			Prices:  $3.00 1 - 100;  $2.50  101 - 1000;  $2.25 1001 +
+	
+		}
 
 	gold.member =	Monthly Recuring payment $10
 	platinum.member = Yearly Recurring $50
